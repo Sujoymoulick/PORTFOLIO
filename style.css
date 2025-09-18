@@ -1,0 +1,28 @@
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.gradient-text {
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(to right, #6ee7b7, #3b82f6, #9333ea);
+}
+
+.bg-gradient-custom {
+  background: radial-gradient(at 50% 50%, #171717 0%, #000000 100%);
+}
+
+.social-link {
+  transition: transform 0.2s ease-in-out;
+}
+
+.social-link:hover {
+  transform: scale(1.1);
+}
