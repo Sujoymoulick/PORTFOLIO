@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sujoy Moulick's Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* Custom styles for animations and gradients */
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+
+    .social-link {
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .social-link:hover {
+      transform: scale(1.1);
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, #00C6FF, #0072FF);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Animation for the timeline items */
+    .timeline-item,
+    .stat-item {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .timeline-item.is-visible,
+    .stat-item.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .timeline-item:nth-child(1) {
+      transition-delay: 0.1s;
+    }
+
+    .timeline-item:nth-child(2) {
+      transition-delay: 0.2s;
+    }
+
+    .timeline-item:nth-child(3) {
+      transition-delay: 0.3s;
+    }
+
+    .stat-item:nth-child(1) {
+      transition-delay: 0.1s;
+    }
+
+    .stat-item:nth-child(2) {
+      transition-delay: 0.2s;
+    }
+
+    .stat-item:nth-child(3) {
+      transition-delay: 0.3s;
+    }
+
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      /* IE and Edge */
+      scrollbar-width: none;
+      /* Firefox */
+    }
+
+    /* Custom styles for 3D globe visualization */
+    #three-canvas {
+      z-index: 10;
+    }
+
+    .glow-border {
+      box-shadow: 0 0 10px rgba(0, 198, 255, 0.5), 0 0 20px rgba(0, 198, 255, 0.3);
+      border-color: rgba(0, 198, 255, 0.7);
+    }
+
+    /* Timeline specific styling */
+    .timeline-container {
+      position: relative;
+    }
+
+    .timeline-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 1rem;
+      width: 2px;
+      background-color: #4b5563;
+    }
+
+    .timeline-block {
+      position: relative;
+      padding-left: 3rem;
+      margin-bottom: 2rem;
+    }
+
+    .timeline-block::before {
+      content: '';
+      position: absolute;
+      left: 0.75rem;
+      top: 0.5rem;
+      width: 16px;
+      height: 16px;
+      background-color: #0072FF;
+      border-radius: 50%;
+      border: 3px solid #1f2937;
+    }
+  </style>
+</head>
+
+<body class="bg-black text-gray-200">
+
+  <!-- Header -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm shadow-md py-4 px-6 md:px-12">
+    <nav class="flex justify-between items-center max-w-7xl mx-auto">
+      <div class="text-white text-2xl font-bold">SUJOY MOULICK</div>
+      <div class="hidden md:flex space-x-8">
+        <a href="#home" class="text-white hover:text-cyan-400 transition-colors duration-200">Home</a>
+        <a href="#about" class="text-white hover:text-cyan-400 transition-colors duration-200">About</a>
+        <a href="#education" class="text-white hover:text-cyan-400 transition-colors duration-200">Education</a>
+        <a href="#works" class="text-white hover:text-cyan-400 transition-colors duration-200">Works</a>
+        <a href="#certificates" class="text-white hover:text-cyan-400 transition-colors duration-200">Certificates</a>
+        <a href="#contact" class="text-white hover:text-cyan-400 transition-colors duration-200">Contact</a>
+      </div>
+      <button id="menu-button" class="md:hidden text-white focus:outline-none">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+          </path>
+        </svg>
+      </button>
+    </nav>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden mt-4 text-center">
+      <a href="#home" class="block py-2 text-white hover:text-cyan-400 transition-colors duration-200">Home</a>
+      <a href="#about" class="block py-2 text-white hover:text-cyan-400 transition-colors duration-200">About</a>
+      <a href="#education"
+        class="block py-2 text-white hover:text-cyan-400 transition-colors duration-200">Education</a>
+      <a href="#works" class="block py-2 text-white hover:text-cyan-400 transition-colors duration-200">Works</a>
+      <a href="#certificates"
+        class="block py-2 text-white hover:text-cyan-400 transition-colors duration-200">Certificates</a>
+      <a href="#contact" class="block py-2 text-white hover:text-cyan-400 transition-colors duration-200">Contact</a>
+    </div>
+  </header>
+
+  <main class="relative z-10 pt-24">
+
+    <!-- Social Media Buttons (Fixed to the left) -->
+    <div class="fixed top-1/2 -translate-y-1/2 left-4 z-50 flex-col items-center space-y-4 hidden md:flex">
+      <a href="https://www.linkedin.com/in/sujoymoulick/"
+        class="social-link p-2 bg-gray-800 rounded-full text-white hover:bg-blue-600" aria-label="LinkedIn">
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.768s.784-1.768 1.75-1.768 1.75.79 1.75 1.768-.784 1.768-1.75 1.768zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.761 7 2.457v6.778z" />
+        </svg>
+      </a>
+      <a href="https://github.com/Sujoymoulick"
+        class="social-link p-2 bg-gray-800 rounded-full text-white hover:bg-gray-400" aria-label="GitHub">
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.809 1.305 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.468-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.046.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+        </svg>
+      </a>
+      <a href="https://x.com/MoulickSujoy10?t=vNC8Ewy__gHRdYZNKIDixQ&s=09"
+        class="social-link p-2 bg-gray-800 rounded-full text-white hover:bg-blue-400" aria-label="Twitter">
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.594 0-6.492 3.001-6.492 6.703 0 .529.052 1.044.153 1.531-5.388-.266-10.165-2.879-13.38-6.819-.571.981-.894 2.126-.894 3.334 0 2.311 1.168 4.316 2.946 5.49-.968-.031-1.881-.297-2.671-.734v.085c0 3.251 2.311 5.969 5.378 6.589-.533.145-1.096.223-1.672.223-.407 0-.805-.038-1.192-.114.862 2.67 3.313 4.618 6.207 4.673-2.28 1.78-5.168 2.845-8.311 2.845-.54 0-1.07-.033-1.592-.092 2.924 1.865 6.368 2.955 10.05 2.955 12.062 0 18.66-10.007 18.66-18.673 0-.34-.008-.67-.02-.991.962-.695 1.797-1.562 2.457-2.55z" />
+        </svg>
+      </a>
+      <a href="https://www.instagram.com/lifeunderz?igsh=M2tpY2t2MjZtazRz"
+        class="social-link p-2 bg-gray-800 rounded-full text-white hover:bg-pink-600" aria-label="Instagram">
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.148 3.252-1.691 4.771-4.919 4.919-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-3.251-.148-4.771-1.691-4.919-4.919-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.149-3.251 1.691-4.771 4.919-4.919 1.266-.058 1.646-.07 4.85-.07zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.201-6.78 2.623-6.981 6.981-.058 1.281-.072 1.689-.072 4.948 0 3.259.014 3.668.072 4.948.201 4.357 2.623 6.78 6.981 6.981 1.28.058 1.688.072 4.948.072s3.668-.014 4.948-.072c4.354-.201 6.782-2.623 6.981-6.981.058-1.28.072-1.689.072-4.948 0-3.259-.014-3.667-.072-4.947-.199-4.358-2.622-6.78-6.981-6.981-1.281-.058-1.689-.072-4.948-.072zM12 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.442.645-1.442 1.44s.646 1.443 1.442 1.443c.797 0 1.443-.646 1.443-1.443s-.646-1.44-1.443-1.44z" />
+        </svg>
+      </a>
+    </div>
+
+    <!-- Home Section with 3D Background -->
+    <section id="home"
+      class="relative min-h-screen flex items-center justify-center text-center px-4 py-12 bg-black overflow-hidden">
+      <!-- NOTE: Replace the video source with a working URL to your video. -->
+      <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover">
+        <source src="video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <!-- Spline 3D model will be placed here -->
+      <iframe src='https://my.spline.design/galaxy-GkxfPUoOpsTgg5UMzTW9Trug/' frameborder='0'
+        class="absolute inset-0 w-full h-full block z-10"></iframe>
+
+      <div class="relative z-20 max-w-4xl mx-auto p-8 rounded-3xl bg-gray-900/60 backdrop-blur-sm">
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight tracking-tight text-white mb-6">
+          WELCOME TO
+          <span class="gradient-text block mt-2">MY PORTFOLIO</span>
+        </h1>
+        <p class="text-base md:text-lg text-gray-400 max-w-2xl mx-auto mb-8">
+          I'm Sujoy Moulick, a Computer Science and Engineering (AIML) student, frontend developer, and
+          aspiring blockchain enthusiast. I enjoy building web applications, solving problems, and exploring
+          new technologies while documenting my journey as a content creator.
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+          <a href="#about"
+            class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg">Learn
+            More</a>
+          <a href="#works"
+            class="bg-gray-800 hover:bg-gray-700 text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg">Explore</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="relative py-20 px-6 overflow-hidden bg-black">
+      <!-- NOTE: Replace the video source with a working URL to your video. -->
+      <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover">
+        <source src="video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+
+      <div
+        class="relative z-10 max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12 p-8 rounded-3xl bg-gray-900/60 backdrop-blur-sm">
+        <div class="md:w-1/2">
+          <!-- NOTE: Replace the image source with a working URL to your image. -->
+          <img src="main.jpg" alt="Sujoy Moulick" class="rounded-3xl shadow-lg ring-4 ring-gray-800">
+        </div>
+        <div class="md:w-1/2 text-center md:text-left">
+          <h2 class="text-4xl font-extrabold mb-4 gradient-text">INTRODUCTION</h2>
+          <p class="text-lg text-gray-400 mb-6">
+            I'm Sujoy Moulick, a 2nd-year Computer Science and Engineering (AIML) student with a passion
+            for web development, AI/ML, and blockchain technologies. I enjoy turning ideas into interactive
+            projects, solving problems with code, and continuously learning new skills. Alongside academics,
+            I create content to share my journey and connect with like-minded learners. My goal is to grow
+            as a developer while contributing to impactful projects and communities.
+          </p>
+          <a href="https://www.linkedin.com/in/sujoymoulick/"
+            class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg">Connect
+            with me</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="relative py-20 px-6 overflow-hidden bg-black">
+      <!-- NOTE: Replace the video source with a working URL to your video. -->
+      <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover">
+        <source src="video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+
+      <div class="relative z-10 max-w-7xl mx-auto">
+        <h2 class="text-4xl font-extrabold text-center mb-12 text-white">EDUCATION</h2>
+        <div class="timeline-container max-w-3xl mx-auto">
+          <div class="timeline-block timeline-item">
+            <div class="bg-gray-900/60 p-6 rounded-2xl shadow-xl border border-gray-800 backdrop-blur-sm">
+              <h3 class="text-3xl font-bold mb-2 text-white">2021</h3>
+              <p class="text-sm text-gray-400">BIDHAN CHANDRA SIKSHAYATAN</p>
+              <p class="mt-2 text-gray-400">Ranaghat Bidhan Chandra Sikshayatan, West Bengal. Developed early interest
+                in technology and problem-solving.</p>
+            </div>
+          </div>
+          <div class="timeline-block timeline-item">
+            <div class="bg-gray-900/60 p-6 rounded-2xl shadow-xl border border-gray-800 backdrop-blur-sm">
+              <h3 class="text-3xl font-bold mb-2 text-white">2023</h3>
+              <p class="text-sm text-gray-400">PC HIGH SCHOOL</p>
+              <p class="mt-2 text-gray-400">Ranaghat PC High School, West Bengal. Strong foundation in Mathematics &
+                Computer Science.</p>
+            </div>
+          </div>
+          <div class="timeline-block timeline-item">
+            <div class="bg-gray-900/60 p-6 rounded-2xl shadow-xl border border-gray-800 backdrop-blur-sm">
+              <h3 class="text-3xl font-bold mb-2 text-white">2024</h3>
+              <p class="text-sm text-gray-400">UEM JAIPUR</p>
+              <p class="mt-2 text-gray-400">B.Tech in Computer Science & Engineering (AI & ML) - University of
+                Engineering and Management, Jaipur (2024 - Present, 2nd Year). Learning AI/ML, Web Development, DSA, and
+                Blockchain fundamentals.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Works/Projects Section -->
+    <section id="works" class="relative py-20 px-6 overflow-hidden bg-gray-950">
+      <!-- NOTE: Replace the video source with a working URL to your video. -->
+      <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover">
+        <source src="video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+
+      <div class="relative z-10 max-w-7xl mx-auto">
+        <h2 class="text-4xl font-extrabold text-center mb-12 gradient-text">PROJECTS & WORK EXPERIENCE</h2>
+        <div class="grid md:grid-cols-2 gap-10">
+
+          <!-- Project Card: ADHYAYAN -->
+          <div
+            class="bg-white-950/60 rounded-2xl p-8 shadow-xl border border-gray-800 backdrop-blur-sm transition-transform duration-300 hover:scale-[1.02]">
+            <div class="flex items-center mb-4">
+              <div
+                class="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white text-3xl font-bold">
+                <img src="removeadya.png" alt="">
+              </div>
+              <div class="ml-4">
+                <h3 class="text-2xl font-semibold text-white">ADHYAYAN: Learn, Compete & Grow</h3>
+                <p class="text-sm text-gray-400">Gamified learning app</p>
+              </div>
+            </div>
+            <p class="text-gray-400 mb-6">
+              A gamified learning app with real-time quizzes, streaks, and rewards. Designed to make
+              learning engaging and fun.
+            </p>
+            <a href="https://github.com/Sujoymoulick/ADHYAYAN" class="text-blue-400 hover:underline font-medium">View
+              Project →</a>
+          </div>
+
+          <!-- Project Card: P2P Ticket Resale -->
+          <div
+            class="bg-gray-900/60 rounded-2xl p-8 shadow-xl border border-gray-800 backdrop-blur-sm transition-transform duration-300 hover:scale-[1.02]">
+            <div class="flex items-center mb-4">
+              <div
+                class="w-16 h-16 rounded-full bg-orange-500 flex items-center justify-center text-white text-3xl font-bold">
+                P</div>
+              <div class="ml-4">
+                <h3 class="text-2xl font-semibold text-white">P2P Ticket Resale Platform</h3>
+                <p class="text-sm text-gray-400">Blockchain-based platform</p>
+              </div>
+            </div>
+            <p class="text-gray-400 mb-6">
+              A blockchain-based platform ensuring secure and transparent ticket resale, eliminating
+              fraud and middlemen.
+            </p>
+            <a href="https://github.com/Sujoymoulick/P2P-ticket-resale-platform."
+              class="text-blue-400 hover:underline font-medium">View Project →</a>
+          </div>
+
+          <!-- Experience Card: C++ repo -->
+          <div
+            class="bg-gray-900/60 rounded-2xl p-8 shadow-xl border border-gray-800 backdrop-blur-sm transition-transform duration-300 hover:scale-[1.02]">
+            <div class="flex items-center mb-4">
+              <div
+                class="w-16 h-16 rounded-full bg-violet-600 flex items-center justify-center text-white text-3xl font-bold">
+                W</div>
+              <div class="ml-4">
+                <h3 class="text-2xl font-semibold text-white">MY C/C++/Python REPOSITORIES</h3>
+                <p class="text-sm text-gray-400">Check out my basic to advanced problem</p>
+              </div>
+            </div>
+            <p class="text-gray-400 mb-6">
+              This repository features efficient C and C++ solutions for building scalable, high-performance
+              applications and system modules. Explore robust source code and practical examples tailored for both
+              beginners and advanced developers.
+            </p>
+            <a href="Crepo.html" class="text-blue-400 hover:underline font-medium">Learn More →</a>
+          </div>
+
+          <!-- Content Creator Card: YouTube Channels -->
+          <div
+            class="bg-gray-900/60 rounded-2xl p-8 shadow-xl border border-gray-800 backdrop-blur-sm transition-transform duration-300 hover:scale-[1.02]">
+            <div class="flex items-center mb-4">
+              <div
+                class="w-16 h-16 rounded-full bg-red-600 flex items-center justify-center text-white text-3xl font-bold">
+                Y</div>
+              <div class="ml-4">
+                <h3 class="text-2xl font-semibold text-white">YouTube Channels</h3>
+                <p class="text-sm text-gray-400">Content Creator</p>
+              </div>
+            </div>
+            <p class="text-gray-400 mb-6">
+              Sharing tech learning, coding journey, and lifestyle content. Built a growing community of
+              2,000+ subscribers.
+            </p>
+            <a href="https://www.youtube.com/@yojusEF-x4q" class="text-blue-400 hover:underline font-medium">Visit
+              Channel →</a>
+          </div>
+
+          <!-- Deployed Project Card -->
+          <div
+            class="bg-gray-900/60 rounded-2xl p-8 shadow-xl border border-gray-800 backdrop-blur-sm transition-transform duration-300 hover:scale-[1.02]">
+            <div class="flex items-center mb-4">
+              <div
+                class="w-16 h-16 rounded-full bg-cyan-600 flex items-center justify-center text-white text-3xl font-bold">
+                <img src="relogo.png" alt="">
+              </div>
+              <div class="ml-4">
+                <h3 class="text-2xl font-semibold text-white">All-in-One Business & Financial Calculator</h3>
+                <p class="text-sm text-gray-400">Live web application</p>
+              </div>
+            </div>
+            <p class="text-gray-400 mb-6">
+              This comprehensive all-in-one business calculator offers an extensive suite of tools for finance,
+              investment, partnership management, taxation, loans, retirement planning, insurance, and more. Easily
+              calculate loan payments, break-even points, ROI, profit margins, and various tax implications. Designed
+              for business professionals, investors, and entrepreneurs, this calculator simplifies complex calculations
+              and streamlines financial decision-making with user-friendly tools for every business scenario
+            </p>
+            <a href="https://lifeunderzero777-jpg.github.io/QUANTIKA/index.html"
+              class="text-blue-400 hover:underline font-medium" target="_blank">View Live
+              →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Certificates Section -->
+    <section id="certificates" class="relative py-20 px-6 overflow-hidden bg-black">
+      <!-- NOTE: Replace the video source with a working URL to your video. -->
+      <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover">
+        <source src="video.mp4" type="video/mp4">
+      </video>
+
+      <div class="relative z-10 max-w-7xl mx-auto">
+        <h2 class="text-4xl font-extrabold text-center mb-12 text-white">CERTIFICATES</h2>
+        <div id="certificates-carousel" class="flex overflow-x-scroll no-scrollbar space-x-6 py-4 px-2 cursor-grab">
+
+          <!-- Certificate Card 1 -->
+          <div
+            class="flex-shrink-0 w-80 bg-gray-900/60 rounded-2xl p-6 shadow-xl border border-gray-800 backdrop-blur-sm transition-transform duration-300 hover:scale-[1.02]">
+            <!-- NOTE: Replace the image source with a working URL to your certificate image. -->
+            <img src="Generative AI.png" alt="Certificate 1" class="rounded-lg mb-4">
+            <h3 class="text-xl font-semibold text-white">Generative AI Basics</h3>
+            <p class="text-gray-400">Awarded by Google Cloud for Introduction to Generative AI.</p>
+          </div>
+
+          <!-- Certificate Card 2 -->
+          <div
+            class="flex-shrink-0 w-80 bg-gray-900/60 rounded-2xl p-6 shadow-xl border border-gray-800 backdrop-blur-sm transition-transform duration-300 hover:scale-[1.02]">
+            <!-- NOTE: Replace the image source with a working URL to your certificate image. -->
+            <img src="DM.png" alt="Certificate 2" class="rounded-lg mb-4">
+            <h3 class="text-xl font-semibold text-white">Digital Marketing Basics</h3>
+            <p class="text-gray-400">Awarded by Google for Foundations of Digital Marketing and E-commerce.</p>
+          </div>
+
+          <!-- Certificate Card 3 -->
+          <div
+            class="flex-shrink-0 w-80 bg-gray-900/60 rounded-2xl p-6 shadow-xl border border-gray-800 backdrop-blur-sm transition-transform duration-300 hover:scale-[1.02]">
+            <!-- NOTE: Replace the image source with a working URL to your certificate image. -->
+            <img src="mongodb.png" alt="Certificate 3" class="rounded-lg mb-4">
+            <h3 class="text-xl font-semibold text-white">MongoDB Basics</h3>
+            <p class="text-gray-400">Awarded by MongoDB University for MongoDB Basics for Students.</p>
+          </div>
+
+
+          <!-- Certificate Card 4 -->
+          <div
+            class="flex-shrink-0 w-80 bg-gray-900/60 rounded-2xl p-6 shadow-xl border border-gray-800 backdrop-blur-sm transition-transform duration-300 hover:scale-[1.02]">
+            <!-- NOTE: Replace the image source with a working URL to your certificate image. -->
+            <img src="ResponsibleAl.png" alt="Certificate 3" class="rounded-lg mb-4">
+            <h3 class="text-xl font-semibold text-white">Google AI Principles</h3>
+            <p class="text-gray-400">Awarded by Google Cloud for Responsible AI: Applying AI Principles with Google
+              Cloud.</p>
+          </div>
+
+          <!-- Certificate Card 5 -->
+          <div
+            class="flex-shrink-0 w-80 bg-gray-900/60 rounded-2xl p-6 shadow-xl border border-gray-800 backdrop-blur-sm transition-transform duration-300 hover:scale-[1.02]">
+            <!-- NOTE: Replace the image source with a working URL to your certificate image. -->
+            <img src="LLM.png" alt="Certificate 3" class="rounded-lg mb-4">
+            <h3 class="text-xl font-semibold text-white">Language Model Basics</h3>
+            <p class="text-gray-400">Awarded by Google Cloud for Introduction to Large Language Models.</p>
+          </div>
+          <!-- Add more certificate cards as needed -->
+        </div>
+        <!-- View More Button -->
+        <div class="text-center mt-12">
+          <a href="certificate.html"
+            class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg">View
+            All Certificates →</a>
+        </div>
+      </div>
+      </div>
+    </section>
+
+    <!-- Resume Section -->
+    <section id="resume" class="relative py-20 px-6 overflow-hidden bg-black">
+      <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover">
+        <source src="video.mp4" type="video/mp4">
+      </video>
+      <div class="relative z-10 max-w-xl mx-auto text-center p-8 rounded-3xl bg-gray-900/60 backdrop-blur-sm">
+        <h2 class="text-4xl font-extrabold mb-4 text-white">MY RESUME</h2>
+        <p class="text-lg text-gray-400 mb-8">
+          You can download my full resume to learn more about my skills, education, and professional experience.
+        </p>
+        <a href="MyResume.pdf" download
+          class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-xl transition-all duration-300 transform hover:scale-105">
+          Download Resume
+        </a>
+      </div>
+    </section>
+
+
+
+    <!-- Contact Section with Video Background -->
+    <section id="contact" class="relative py-20 px-6 overflow-hidden bg-black">
+      <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover">
+        <source src="video.mp4" type="video/mp4">
+      </video>
+
+      <div class="relative z-10 max-w-xl mx-auto text-center p-8 rounded-3xl bg-gray-900/60 backdrop-blur-sm">
+        <h2 class="text-4xl font-extrabold mb-4 gradient-text">GET IN TOUCH</h2>
+        <p class="text-lg text-gray-400 mb-8">
+          Feel free to reach out to me for collaborations, questions, or just to say hello!
+        </p>
+        <a href="form.html"
+          class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-xl transition-all duration-300 transform hover:scale-105">
+          Send Message
+        </a>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section id="stats" class="relative py-20 px-6 overflow-hidden bg-gray-950">
+      <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover">
+        <source src="video.mp4" type="video/mp4">
+      </video>
+
+      <div class="relative z-10 max-w-7xl mx-auto text-center">
+        <h2 class="text-4xl font-extrabold text-center mb-12 text-white">MY STATS</h2>
+        <div class="bg-gray-900/60 rounded-2xl p-6 shadow-xl border border-gray-800 backdrop-blur-sm aspect-video">
+          <iframe src='https://my.spline.design/cybermannequin-yryVC9L50y7PnvzMTBMjLotw/' frameborder='0'
+            class="w-full h-full"></iframe>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="stat-item bg-gray-900/60 rounded-2xl p-6 shadow-xl border border-gray-800 backdrop-blur-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+              class="w-12 h-12 text-blue-400 mx-auto mb-4">
+              <path
+                d="M12 2.25a.75.75 0 0 1 .75.75v2.25a.75.75 0 0 1-1.5 0V3a.75.75 0 0 1 .75-.75ZM7.5 12a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM18.75 4.5a.75.75 0 0 0-.75.75v2.25a.75.75 0 0 0 1.5 0V5.25a.75.75 0 0 0-.75-.75ZM18.75 16.5a.75.75 0 0 0-.75.75v2.25a.75.75 0 0 0 1.5 0v-2.25a.75.75 0 0 0-.75-.75ZM4.5 18.75a.75.75 0 0 0 .75-.75v-2.25a.75.75 0 0 0-1.5 0v2.25a.75.75 0 0 0 .75.75ZM3 12a.75.75 0 0 0 .75.75h2.25a.75.75 0 0 0 0-1.5H3.75A.75.75 0 0 0 3 12ZM12 18.75a.75.75 0 0 0-.75.75v2.25a.75.75 0 0 0 1.5 0v-2.25a.75.75 0 0 0-.75-.75ZM16.5 4.5a.75.75 0 0 0 .75-.75h2.25a.75.75 0 0 0 0-1.5h-2.25a.75.75 0 0 0-.75.75v2.25ZM6.75 3.75h-.008v-.008H6.75v.008ZM18 12a.75.75 0 0 1 .75-.75h2.25a.75.75 0 0 1 0 1.5H18.75A.75.75 0 0 1 18 12ZM7.5 6a.75.75 0 0 0-.75.75v2.25a.75.75 0 0 0 1.5 0v-2.25a.75.75 0 0 0-.75-.75ZM15 7.5a.75.75 0 0 0-.75.75h-2.25a.75.75 0 0 0 0 1.5h2.25A.75.75 0 0 0 15 8.25ZM7.5 15a.75.75 0 0 0-.75.75v2.25a.75.75 0 0 0 1.5 0v-2.25a.75.75 0 0 0-.75-.75ZM15 15a.75.75 0 0 0-.75.75v2.25a.75.75 0 0 0 1.5 0v-2.25a.75.75 0 0 0-.75-.75ZM19.5 7.5a.75.75 0 0 0-.75.75v2.25a.75.75 0 0 0 1.5 0v-2.25a.75.75 0 0 0-.75-.75ZM19.5 15a.75.75 0 0 0-.75.75v2.25a.75.75 0 0 0 1.5 0v-2.25a.75.75 0 0 0-.75-.75ZM6 10.5h-2.25a.75.75 0 0 0 0 1.5H6a.75.75 0 0 0 0-1.5ZM6.75 16.5a.75.75 0 0 0-.75.75v2.25a.75.75 0 0 0 1.5 0v-2.25a.75.75 0 0 0-.75-.75ZM15 10.5a.75.75 0 0 0-.75.75v2.25a.75.75 0 0 0 1.5 0v-2.25a.75.75 0 0 0-.75-.75ZM12 6a.75.75 0 0 0-.75.75v2.25a.75.75 0 0 0 1.5 0V6.75a.75.75 0 0 0-.75-.75ZM12 15a.75.75 0 0 0-.75.75v2.25a.75.75 0 0 0 1.5 0v-2.25a.75.75 0 0 0-.75-.75ZM10.5 12a.75.75 0 0 0-.75.75v2.25a.75.75 0 0 0 1.5 0V12.75a.75.75 0 0 0-.75-.75ZM12 7.5a.75.75 0 0 0-.75.75v2.25a.75.75 0 0 0 1.5 0V8.25a.75.75 0 0 0-.75-.75Z" />
+            </svg>
+            <h3 class="stat-count text-4xl font-extrabold text-white" data-target="35">0</h3>
+            <h5 class="stat-title text-gray-400 text-lg">Crazy Ideas</h5>
+          </div>
+          <div class="stat-item bg-gray-900/60 rounded-2xl p-6 shadow-xl border border-gray-800 backdrop-blur-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+              class="w-12 h-12 text-red-400 mx-auto mb-4">
+              <path
+                d="M10.024 9.778a1.2 1.2 0 0 0-.731-.837C7.309 8.28 6 6.55 6 4.5A4.5 4.5 0 0 1 10.5 0c1.789 0 3.321.996 4.167 2.479a1.2 1.2 0 0 0 .731.836l3.398 1.458c.277.119.467.433.467.755v5.045a1.2 1.2 0 0 0-.742 1.127l.081 1.771a.75.75 0 0 1-.741.875H5.808a.75.75 0 0 1-.742-.875l.081-1.771a1.2 1.2 0 0 0-.741-1.127V5.51a.75.75 0 0 1 .467-.755l3.399-1.458ZM12 11.25a.75.75 0 0 0-.75.75v9a.75.75 0 0 0 1.5 0v-9a.75.75 0 0 0-.75-.75Z" />
+            </svg>
+            <h3 class="stat-count text-4xl font-extrabold text-white" data-target="100">0</h3>
+            <h5 class="stat-title text-gray-400 text-lg">Coffee Cups</h5>
+          </div>
+          <div class="stat-item bg-gray-900/60 rounded-2xl p-6 shadow-xl border border-gray-800 backdrop-blur-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+              class="w-12 h-12 text-green-400 mx-auto mb-4">
+              <path fill-rule="evenodd"
+                d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 6a.75.75 0 0 0-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 0 0 0-1.5h-3.75V6Z"
+                clip-rule="evenodd" />
+            </svg>
+            <h3 class="stat-count text-4xl font-extrabold text-white" data-target="355">0</h3>
+            <h5 class="stat-title text-gray-400 text-lg">Hours</h5>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="py-8 bg-gray-950 text-center text-gray-500">
+    <p>Thank You for Visiting!</p>
+    <p class="text-sm mt-2">I truly appreciate your time exploring my portfolio. I'm always open to learning,
+      collaboration, and exciting opportunities-so feel free to connect with me. Let's build something impactful
+      together.</p>
+  </footer>
+
+  <script>
+    window.onload = function () {
+      // Mobile menu functionality
+      const menuButton = document.getElementById('menu-button');
+      const mobileMenu = document.getElementById('mobile-menu');
+
+      if (menuButton) {
+        menuButton.addEventListener('click', () => {
+          mobileMenu.classList.toggle('hidden');
+        });
+      }
+
+      // Smooth scroll for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            window.scrollTo({
+              top: target.offsetTop,
+              behavior: 'smooth'
+            });
+            // Hide mobile menu after clicking a link
+            if (!mobileMenu.classList.contains('hidden')) {
+              mobileMenu.classList.add('hidden');
+            }
+          }
+        });
+      });
+
+      // Certificates Carousel Drag functionality
+      const carousel = document.getElementById('certificates-carousel');
+      if (carousel) {
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        carousel.addEventListener('mousedown', (e) => {
+          isDown = true;
+          carousel.classList.add('active');
+          startX = e.pageX - carousel.offsetLeft;
+          scrollLeft = carousel.scrollLeft;
+        });
+        carousel.addEventListener('mouseleave', () => {
+          isDown = false;
+          carousel.classList.remove('active');
+        });
+        carousel.addEventListener('mouseup', () => {
+          isDown = false;
+          carousel.classList.remove('active');
+        });
+        carousel.addEventListener('mousemove', (e) => {
+          if (!isDown) return;
+          e.preventDefault();
+          const x = e.pageX - carousel.offsetLeft;
+          const walk = (x - startX) * 2; //scroll-fast
+          carousel.scrollLeft = scrollLeft - walk;
+        });
+      }
+
+      // Function to handle number counting animation
+      function animateNumber(element, target) {
+        let start = 0;
+        const duration = 2000; // 2 seconds
+        const step = (target / duration) * 10;
+        let current = 0;
+
+        const timer = setInterval(() => {
+          current += step;
+          if (current >= target) {
+            clearInterval(timer);
+            current = target;
+          }
+          element.textContent = Math.floor(current);
+        }, 10);
+      }
+
+
+      // Intersection Observer for animations
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+
+            // If it's a stat item, trigger the number animation
+            if (entry.target.classList.contains('stat-item')) {
+              const statElement = entry.target.querySelector('.stat-count');
+              const targetNumber = parseInt(statElement.getAttribute('data-target'), 10);
+              animateNumber(statElement, targetNumber);
+            }
+
+            // Stop observing once the animation is triggered
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.5 // Trigger when 50% of the element is visible
+      });
+
+      // Observe the education timeline items
+      const educationItems = document.querySelectorAll('.timeline-item');
+      educationItems.forEach(item => {
+        observer.observe(item);
+      });
+
+      // Observe the new stats items
+      const statItems = document.querySelectorAll('.stat-item');
+      statItems.forEach(item => {
+        observer.observe(item);
+      });
+    };
+  </script>
+
+</body>
+
+</html>

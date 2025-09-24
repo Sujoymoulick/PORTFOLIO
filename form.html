@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Form</title>
+  <link rel="stylesheet" href="form.css">
+</head>
+
+<body>
+  <video autoplay muted loop playsinline id="background-video">
+    <source src="video.mp4" type="video/mp4">
+  </video>
+
+  <div class="contact-container">
+    <form action="https://api.web3forms.com/submit" method="POST" class="contact-left">
+      <div class="contact-left-title">
+        <h2>Get in touch</h2>
+        <hr>
+      </div>
+      <input type="hidden" name="access_key" value="3c8ade40-7a34-41d9-9342-2ae14fdb6d28">
+      <input type="text" name="name" placeholder="Your Name" class="contact-inputs" required>
+      <input type="email" name="email" placeholder="Your Email" class="contact-inputs" required>
+      <textarea name="message" placeholder="Your Message" class="contact-inputs" required></textarea>
+      <button type="submit">Submit </button>
+    </form>
+    <div class="contact-right">
+      <img src="main.jpg" alt="">
+
+    </div>
+    <div class="contact-left-title">
+      <br><br>
+      <a href="index.html"><button class="ssb1">BACK TO HOME</button></a>
+    </div>
+  </div>
+
+</body>
+
+</html>
