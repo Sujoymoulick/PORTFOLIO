@@ -1,20 +1,55 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# 🚀 Sujoy Moulick – Personal Portfolio
 
-# Run and deploy your AI Studio app
+![Portfolio Banner](https://img.shields.io/badge/Status-Live-success?style=for-the-badge)
+![Built With](https://img.shields.io/badge/Built%20With-Web%20Tech-blue?style=for-the-badge)
 
-This contains everything you need to run your app locally.
+🌐 **Live Website:** https://www.sujoymoulick.online/
 
-View your app in AI Studio: https://ai.studio/apps/13fbf006-9d22-41c2-a7bd-b6ce053554bd
+---
 
-## Run Locally
+## 👨‍💻 About Me
 
-**Prerequisites:**  Node.js
+Hi, I'm **Sujoy Moulick**  
+🎓 2nd Year CSE (AI/ML) Student  
+⚡ Passionate about **AI, Web Development & Web3**  
+🚀 Building projects that combine **innovation + real-world impact**
 
+---
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## ✨ Features
+
+- 🔥 Modern & Minimal UI/UX
+- ⚡ Fast & Fully Responsive Design
+- 🌙 Clean Personal Branding
+- 🧠 Showcases Skills, Projects & Vision
+- 📱 Mobile-Friendly Experience
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend:** HTML, CSS, JavaScript / React (if used)
+- **Styling:** Tailwind CSS / Custom CSS
+- **Deployment:** Vercel
+
+---
+
+## 📂 Sections
+
+- 🏠 Home
+- 👨‍💻 About Me
+- 🚀 Projects
+- 🛠 Skills
+- 📞 Contact
+
+---
+
+## 🚀 Getting Started
+
+Clone the repo and run locally:
+
+```bash
+git clone https://github.com/your-username/your-repo-name.git
+cd your-repo-name
+npm install
+npm run dev
