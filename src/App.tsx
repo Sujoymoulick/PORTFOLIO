@@ -47,6 +47,7 @@ import {
 } from './components/ui/bento-grid-01.tsx';
 import { Smartphone } from 'lucide-react';
 import TechCursor from './components/ui/tech-curosr';
+import { SoundButton } from './components/ui/sound-button';
 
 import certGenAI from '../assets/certificate/Generative AI.png';
 import certMongoDB from '../assets/certificate/mongodb.png';
@@ -449,6 +450,8 @@ const Navbar = () => {
           
           {/* Actions */}
           <div className="flex items-center gap-4 relative z-50">
+            <SoundButton />
+
             <div className="hidden md:block w-px h-8 bg-white/10 mx-2" />
             
             <motion.a
