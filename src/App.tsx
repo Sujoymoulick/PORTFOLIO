@@ -9,6 +9,10 @@ import { Link, BrowserRouter, Routes, Route } from 'react-router-dom';
 import CertificationsPage from './pages/CertificationsPage';
 import ProjectsPage from './pages/ProjectsPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
+import { Suspense, lazy } from 'react';
+
+const Blog = lazy(() => import('./pages/Blog'));
+const BlogPost = lazy(() => import('./pages/BlogPost'));
 import { 
   Github, 
   Linkedin, 
@@ -447,6 +451,7 @@ const Navbar = () => {
                 {item}
               </a>
             ))}
+            <Link to="/blog" className="hover:text-white transition-colors text-blue-400">Blog</Link>
           </div>
           
           {/* Actions */}
@@ -506,6 +511,7 @@ const Navbar = () => {
                   {item}
                 </a>
               ))}
+              <Link to="/blog" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-white transition-colors py-2 text-blue-400">Blog</Link>
               <div className="w-12 h-px bg-white/10 my-4" />
               <a
                 href={resumePdf}
@@ -966,6 +972,7 @@ function Home() {
           © 2026 Sujoy Moulick. Built with React & Motion.
         </div>
         <div className="flex gap-8 text-[9px] font-bold text-white/40 uppercase tracking-[0.2em]">
+          <Link to="/blog" className="hover:text-white transition-colors">Blog</Link>
           <Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
           <a href="/#about" className="hover:text-white transition-colors">About</a>
           <a href="/#contact" className="hover:text-white transition-colors">Contact</a>
@@ -987,6 +994,8 @@ export default function App() {
         <Route path="/certifications" element={<CertificationsPage />} />
         <Route path="/projects" element={<ProjectsPage />} />
         <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+        <Route path="/blog" element={<Suspense fallback={null}><Blog /></Suspense>} />
+        <Route path="/blog/:slug" element={<Suspense fallback={null}><BlogPost /></Suspense>} />
       </Routes>
     </BrowserRouter>
   );

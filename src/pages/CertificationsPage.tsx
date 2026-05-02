@@ -131,9 +131,15 @@ export default function CertificationsPage() {
 
       <nav className="fixed top-0 left-0 right-0 z-50 py-6 px-6 md:px-12 bg-black/40 backdrop-blur-md border-b border-white/5">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <Link to="/" className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-white/60 hover:text-white transition-all group">
-            <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" /> Back home
-          </Link>
+          <div className="flex items-center gap-6">
+            <Link to="/" className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-white/60 hover:text-white transition-all group">
+              <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" /> Back home
+            </Link>
+            <div className="w-px h-3 bg-white/10" />
+            <Link to="/blog" className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/60 hover:text-white transition-all">
+              Blog
+            </Link>
+          </div>
           <div className="text-xl font-display font-black tracking-tighter">
             SM<span className="text-white/40">.</span>
           </div>

@@ -79,7 +79,7 @@ const PrivacyPolicyPage = () => {
         <motion.div 
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="mb-12"
+          className="mb-12 flex items-center gap-6"
         >
           <Link 
             to="/" 
@@ -87,6 +87,13 @@ const PrivacyPolicyPage = () => {
           >
             <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
             Back to Home
+          </Link>
+          <div className="w-px h-3 bg-white/10" />
+          <Link 
+            to="/blog" 
+            className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/40 hover:text-white transition-colors"
+          >
+            Blog
           </Link>
         </motion.div>
 
