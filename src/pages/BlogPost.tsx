@@ -23,7 +23,7 @@ export default function BlogPost() {
     <div className="min-h-screen bg-black text-white selection:bg-white/20">
         <Helmet>
           <title>{post.title} | Sujoy Moulick</title>
-          <meta name="description" content={post.description} />
+          <meta name="description" content={post.metaDescription || post.description} />
         </Helmet>
 
         {/* Background Mesh */}
