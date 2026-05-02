@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Link, BrowserRouter, Routes, Route } from 'react-router-dom';
 import CertificationsPage from './pages/CertificationsPage';
 import ProjectsPage from './pages/ProjectsPage';
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import { 
   Github, 
   Linkedin, 
@@ -965,9 +966,9 @@ function Home() {
           © 2026 Sujoy Moulick. Built with React & Motion.
         </div>
         <div className="flex gap-8 text-[9px] font-bold text-white/40 uppercase tracking-[0.2em]">
-          <a href="#" className="hover:text-white transition-colors">Privacy</a>
-          <a href="#" className="hover:text-white transition-colors">Terms</a>
-          <a href="#" className="hover:text-white transition-colors">Credits</a>
+          <Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
+          <a href="/#about" className="hover:text-white transition-colors">About</a>
+          <a href="/#contact" className="hover:text-white transition-colors">Contact</a>
         </div>
       </footer>
           </motion.div>
@@ -985,6 +986,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/certifications" element={<CertificationsPage />} />
         <Route path="/projects" element={<ProjectsPage />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
       </Routes>
     </BrowserRouter>
   );
