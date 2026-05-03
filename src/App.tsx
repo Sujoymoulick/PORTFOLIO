@@ -4,6 +4,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
+import { Analytics } from "@vercel/analytics/react"
 import { motion, AnimatePresence } from 'motion/react';
 import { Link, BrowserRouter, Routes, Route } from 'react-router-dom';
 import CertificationsPage from './pages/CertificationsPage';
@@ -988,6 +989,7 @@ function Home() {
 export default function App() {
   return (
     <BrowserRouter>
+      <Analytics />
       <TechCursor />
       <Routes>
         <Route path="/" element={<Home />} />
