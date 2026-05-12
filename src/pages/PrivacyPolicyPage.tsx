@@ -1,7 +1,8 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { Shield, ArrowLeft, Mail, ExternalLink, Cookie, Info, Eye, Lock, RefreshCw, UserCheck } from 'lucide-react';
+import { SEO } from '../components/ui/SEO';
 
 const PrivacyPolicyPage = () => {
   const sections = [
@@ -67,80 +68,67 @@ const PrivacyPolicyPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-black text-white font-sans selection:bg-white/20">
-      {/* Background Decor */}
-      <div className="fixed inset-0 z-0 pointer-events-none opacity-40">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-blue-500/10 blur-[120px]" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-purple-500/10 blur-[120px]" />
+    <div className="min-h-screen bg-black text-white selection:bg-white/20">
+      <SEO 
+        title="Privacy Policy" 
+        description="Read the privacy policy for sujoymoulick.online." 
+        slug="privacy-policy"
+      />
+
+      {/* Background Mesh */}
+      <div className="fixed inset-0 z-0 pointer-events-none opacity-20">
+        <div className="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-blue-500/20 blur-[150px]" />
+        <div className="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-purple-500/20 blur-[150px]" />
       </div>
 
-      <div className="relative z-10 max-w-4xl mx-auto px-6 py-20">
-        {/* Navigation */}
-        <motion.div 
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          className="mb-12 flex items-center gap-6"
-        >
-          <Link 
-            to="/" 
-            className="group flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.3em] text-white/40 hover:text-white transition-colors"
-          >
-            <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
-            Back to Home
+      <nav className="fixed top-0 left-0 right-0 z-50 py-6 px-6 md:px-12 bg-black/40 backdrop-blur-md border-b border-white/5">
+        <div className="max-w-7xl mx-auto flex justify-between items-center">
+          <Link to="/" className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-white/60 hover:text-white transition-all group">
+            <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" /> Back home
           </Link>
-          <div className="w-px h-3 bg-white/10" />
-          <Link 
-            to="/blog" 
-            className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/40 hover:text-white transition-colors"
-          >
-            Blog
-          </Link>
-        </motion.div>
+          <div className="text-xl font-display font-black tracking-tighter">
+            SM<span className="text-white/40">.</span>
+          </div>
+        </div>
+      </nav>
 
-        {/* Header */}
-        <header className="mb-20">
+      <main className="relative z-10 pt-32 pb-20 max-w-4xl mx-auto px-6">
+        <header className="mb-20 text-center">
           <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="flex items-center gap-4 mb-6"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="inline-block p-4 rounded-3xl bg-white/5 border border-white/10 mb-8"
           >
-            <div className="p-3 rounded-2xl bg-white/5 border border-white/10 text-white/60">
-              <Shield size={32} />
-            </div>
-            <div className="h-px flex-1 bg-gradient-to-r from-white/20 to-transparent" />
+            <Shield size={48} className="text-emerald-400" />
           </motion.div>
-          
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-4xl md:text-6xl font-display font-black tracking-tighter mb-4"
+            className="text-4xl md:text-7xl font-display font-black tracking-tighter mb-6"
           >
             Privacy Policy
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="text-white/40 text-sm font-medium uppercase tracking-[0.2em]"
+            className="text-white/40 text-[10px] uppercase tracking-[0.4em] font-bold"
           >
-            Last Updated: May 2026 • sujoymoulick.online
+            Last Updated: May 2026
           </motion.p>
         </header>
 
-        {/* Content */}
-        <div className="space-y-16">
+        <div className="space-y-12">
           {sections.map((section, index) => (
             <motion.section 
               key={section.id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.05 }}
-              className="relative"
+              transition={{ delay: index * 0.1 }}
+              className="p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-md"
             >
               <div className="flex items-center gap-4 mb-6">
-                <div className="p-2 rounded-lg bg-white/5 border border-white/10">
+                <div className="p-2.5 rounded-xl bg-white/5 border border-white/10">
                   {section.icon}
                 </div>
                 <h2 className="text-xl md:text-2xl font-display font-bold tracking-tight">
@@ -175,13 +163,12 @@ const PrivacyPolicyPage = () => {
           ))}
         </div>
 
-        {/* Footer info */}
         <footer className="mt-32 pt-12 border-t border-white/5 text-center">
           <p className="text-[10px] font-bold text-white/20 uppercase tracking-[0.4em]">
             © 2026 Sujoy Moulick. All Rights Reserved.
           </p>
         </footer>
-      </div>
+      </main>
     </div>
   );
 };

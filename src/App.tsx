@@ -6,18 +6,23 @@
 import React, { useState, useEffect } from 'react';
 import { Analytics } from "@vercel/analytics/react"
 import { motion, AnimatePresence } from 'motion/react';
-import { Link, BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Link, BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import CertificationsPage from './pages/CertificationsPage';
 import ProjectsPage from './pages/ProjectsPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
+import TermsPage from './pages/TermsPage';
+import DisclaimerPage from './pages/DisclaimerPage';
+import AboutPage from './pages/AboutPage';
+import ContactPage from './pages/ContactPage';
 import { Suspense, lazy } from 'react';
 
 const Blog = lazy(() => import('./pages/Blog'));
 const BlogPost = lazy(() => import('./pages/BlogPost'));
+
 import { 
   Github, 
   Linkedin, 
-
+  Twitter,
   ExternalLink, 
   ChevronDown, 
   FileDown, 
@@ -34,7 +39,10 @@ import {
   ArrowRight,
   Loader2,
   X,
-  MoreVertical
+  MoreVertical,
+  TrendingUp,
+  ChevronRight,
+  BookOpen
 } from 'lucide-react';
 import { cn } from './lib/utils';
 import { CinematicHero } from './components/ui/cinematic-landing-hero';
@@ -51,9 +59,9 @@ import {
   SecurityBadge, 
   GlobalNetwork 
 } from './components/ui/bento-grid-01.tsx';
-import { Smartphone } from 'lucide-react';
 import TechCursor from './components/ui/tech-curosr';
 import { SoundButton } from './components/ui/sound-button';
+import { BLOG_POSTS } from './data/blogData';
 
 import certGenAI from '../assets/certificate/Generative AI.png';
 import certMongoDB from '../assets/certificate/mongodb.png';
@@ -61,6 +69,15 @@ import certSoftwareEng from '../assets/certificate/Software engineering.png';
 import certCloud from '../assets/certificate/cloud computing.png';
 import sujoyProfileImg from '../assets/SUJOY MOULICK.jpeg';
 import resumePdf from '../assets/My_resume_2026.pdf';
+
+// --- Scroll To Top Utility ---
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+};
 
 // --- Loading Screen ---
 const LoadingScreen = () => {
@@ -94,7 +111,7 @@ const LoadingScreen = () => {
         >
           <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.4em] text-white/30 font-bold">
             <Loader2 className="w-3 h-3 animate-spin" />
-            Initializing Portfolio
+            Initializing Platform
           </div>
           <div className="h-[1px] w-12 bg-white/10" />
         </motion.div>
@@ -104,12 +121,10 @@ const LoadingScreen = () => {
 };
 
 // --- Data Constants ---
-// ... (rest of constants stay the same)
-
 const STATS = [
   { label: 'Years of Coding', value: '2+', icon: <Clock className="w-5 h-5 text-blue-400" /> },
-  { label: 'Core Projects', value: '5+', icon: <Cpu className="w-5 h-5 text-purple-400" /> },
-  { label: 'YouTube Community', value: '2k+', icon: <Zap className="w-5 h-5 text-orange-400" /> },
+  { label: 'Core Projects', value: '10+', icon: <Cpu className="w-5 h-5 text-purple-400" /> },
+  { label: 'Articles Written', value: '15+', icon: <Zap className="w-5 h-5 text-orange-400" /> },
 ];
 
 const JOURNEY_TIMELINE = [
@@ -288,7 +303,6 @@ const TECHNOLOGIES = [
 ];
 
 // --- Hooks ---
-
 function useWindowSize() {
   const [size, setSize] = React.useState({
     width: typeof window !== 'undefined' ? window.innerWidth : 1200,
@@ -313,7 +327,6 @@ function useWindowSize() {
 }
 
 // --- Components ---
-
 export const SectionHeading = ({ children, icon: Icon, subtitle }: { children: React.ReactNode, icon: any, subtitle?: string }) => (
   <div className="mb-20">
     <div className="flex flex-col gap-4">
@@ -406,18 +419,9 @@ const ProjectCard = ({ project, ...props }: { project: typeof PROJECTS[0] } & Re
               GitHub <Github size={10} />
             </motion.a>
           )}
-          {(!project.github && project.link === '#') && (
-            <motion.a
-              href={project.link}
-              className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-white/20 group-hover:text-white transition-all underline decoration-white/0 group-hover:decoration-white/40 underline-offset-4"
-            >
-              Explore Case Study <ExternalLink size={10} />
-            </motion.a>
-          )}
         </div>
       </div>
 
-      {/* Decorative Index */}
       <div className="absolute top-4 right-6 text-[10px] font-mono text-white/5 font-bold group-hover:text-white/10 transition-colors uppercase tracking-[0.5em]">
         Slot {project.id}
       </div>
@@ -432,21 +436,18 @@ const Navbar = () => {
     <>
       <nav className="fixed top-0 left-0 right-0 z-50 py-6 px-6 md:px-12 bg-black/20 backdrop-blur-sm border-b border-white/5">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
-          {/* Logo */}
-          <motion.div 
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
+          <Link 
+            to="/" 
             className="text-2xl font-display font-black tracking-tighter relative z-50"
           >
             SM<span className="text-white/40">.</span>
-          </motion.div>
+          </Link>
           
-          {/* Links */}
           <div className="hidden md:flex items-center gap-8 text-[10px] font-bold uppercase tracking-[0.2em] text-white/40">
             {['About', 'Journey', 'Stack', 'Works', 'Certifications', 'Contact'].map(item => (
               <a 
                 key={item} 
-                href={`#${item.toLowerCase()}`} 
+                href={item === 'About' || item === 'Contact' ? `/${item.toLowerCase()}` : `/#${item.toLowerCase()}`}
                 className="hover:text-white transition-colors"
               >
                 {item}
@@ -455,10 +456,8 @@ const Navbar = () => {
             <Link to="/blog" className="hover:text-white transition-colors text-blue-400">Blog</Link>
           </div>
           
-          {/* Actions */}
           <div className="flex items-center gap-4 relative z-50">
             <SoundButton />
-
             <div className="hidden md:block w-px h-8 bg-white/10 mx-2" />
             
             <motion.a
@@ -471,20 +470,16 @@ const Navbar = () => {
               Resume
             </motion.a>
 
-            <motion.a
-              href="#contact"
-              whileHover={{ scale: 1.05, backgroundColor: "#f0f0f0" }}
-              whileTap={{ scale: 0.95 }}
-              className="text-[10px] font-bold uppercase tracking-widest bg-white text-black px-6 py-2.5 rounded-full"
+            <Link
+              to="/contact"
+              className="text-[10px] font-bold uppercase tracking-widest bg-white text-black px-6 py-2.5 rounded-full hover:scale-105 transition-transform"
             >
               Let's Talk
-            </motion.a>
+            </Link>
 
-            {/* Mobile Menu Toggle */}
             <button 
               className="md:hidden text-white/80 hover:text-white ml-2 focus:outline-none"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              aria-label="Toggle mobile menu"
             >
               {isMobileMenuOpen ? <X size={24} /> : <MoreVertical size={24} />}
             </button>
@@ -492,7 +487,6 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
@@ -503,25 +497,16 @@ const Navbar = () => {
           >
             <div className="flex flex-col items-center gap-8 text-sm font-bold uppercase tracking-[0.3em] text-white/70">
               {['About', 'Journey', 'Stack', 'Works', 'Certifications', 'Contact'].map(item => (
-                <a 
+                <Link 
                   key={item} 
-                  href={`#${item.toLowerCase()}`} 
+                  to={item === 'About' || item === 'Contact' ? `/${item.toLowerCase()}` : `/#${item.toLowerCase()}`}
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="hover:text-white transition-colors py-2"
                 >
                   {item}
-                </a>
+                </Link>
               ))}
               <Link to="/blog" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-white transition-colors py-2 text-blue-400">Blog</Link>
-              <div className="w-12 h-px bg-white/10 my-4" />
-              <a
-                href={resumePdf}
-                download="My_resume_2026.pdf"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="hover:text-white transition-colors py-2 flex items-center gap-2"
-              >
-                Resume <ExternalLink size={14} />
-              </a>
             </div>
           </motion.div>
         )}
@@ -534,76 +519,15 @@ function Home() {
   const { width } = useWindowSize();
   const isMobile = width < 768;
   const [isLoading, setIsLoading] = useState(true);
-  const [formResult, setFormResult] = useState("");
-
-  const onContactSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const formElement = event.currentTarget;
-    setFormResult("Sending...");
-    const formData = new FormData(formElement);
-    formData.append("access_key", "8f919b40-4b8b-4a00-a533-81b01d685c1d");
-
-    const object = Object.fromEntries(formData);
-    const json = JSON.stringify(object);
-
-    try {
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json"
-        },
-        body: json
-      });
-
-      const data = await response.json();
-      if (data.success) {
-        setFormResult("Successfully Sended!");
-        formElement.reset();
-      } else {
-        console.error("Web3Forms Error:", data);
-        setFormResult(data.message || "Error submitting form.");
-      }
-    } catch (e: any) {
-      console.error("Submission Exception:", e);
-      setFormResult(e?.message || "An error occurred. Please try again.");
-    }
-  };
 
   useEffect(() => {
-    // Global smooth scroll for anchor links
-    const handleGlobalClick = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      const anchor = target.closest('a');
-      
-      if (anchor) {
-        const href = anchor.getAttribute('href');
-        if (href?.startsWith('#') && href.length > 1) {
-          const targetId = href.substring(1);
-          const targetElement = document.getElementById(targetId);
-          if (targetElement) {
-            e.preventDefault();
-            targetElement.scrollIntoView({
-              behavior: 'smooth',
-              block: 'start',
-            });
-          }
-        }
-      }
-    };
-
-    window.addEventListener('click', handleGlobalClick);
-    return () => window.removeEventListener('click', handleGlobalClick);
-  }, []);
-
-  useEffect(() => {
-    // Simulate loading time
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 4500); // 4.5 seconds for a cinematic feel
-    
+    }, 4500);
     return () => clearTimeout(timer);
   }, []);
+
+  const featuredPosts = BLOG_POSTS.slice(0, 3);
 
   return (
     <div className="relative min-h-screen bg-black">
@@ -619,7 +543,6 @@ function Home() {
             animate={{ opacity: 1 }}
             transition={{ duration: 1.5, ease: "easeOut" }}
           >
-            {/* Background Mesh */}
             <div className="fixed inset-0 z-0 pointer-events-none opacity-40">
               <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-blue-500/20 blur-[120px]" />
               <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-purple-500/20 blur-[120px]" />
@@ -628,357 +551,131 @@ function Home() {
             <Navbar />
 
             <main className="relative z-10 w-full overflow-x-hidden">
-        {/* Section 0: Cinematic Hero pinned section */}
-        <CinematicHero />
+              <CinematicHero />
 
-        {/* Content Layer */}
-        <div className="relative z-20">
+              <div className="relative z-20">
+                <section id="about" className="max-w-7xl mx-auto px-6 py-32 relative z-10 scroll-mt-24">
+                  <SectionHeading icon={User} subtitle="Who am I">Biographical Arc</SectionHeading>
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    <div className="lg:col-span-7 space-y-8">
+                      <motion.p className="text-xl md:text-3xl text-white/80 font-display font-light leading-relaxed">
+                        2nd Year CSE (AI/ML) Student at UEM Jaipur. I view code as <span className="text-white italic">interactive art</span>, building AI-powered tools and Web3 experiences.
+                      </motion.p>
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-12">
+                        {STATS.map((stat, i) => (
+                          <div key={i} className="p-6 rounded-2xl bg-brand-card/40 backdrop-blur-xl border border-brand-border">
+                            <div className="mb-4">{stat.icon}</div>
+                            <div className="text-3xl font-display font-bold mb-1">{stat.value}</div>
+                            <div className="text-[10px] uppercase tracking-widest font-semibold text-white/40">{stat.label}</div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="lg:col-span-5 relative group">
+                      <div className="aspect-square rounded-3xl overflow-hidden grayscale hover:grayscale-0 transition-all duration-700 border border-white/5 relative">
+                        <img src={sujoyProfileImg} alt="Sujoy Moulick" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 object-top" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                      </div>
+                    </div>
+                  </div>
+                </section>
 
-          <section id="about" className="max-w-7xl mx-auto px-6 py-32 relative z-10 scroll-mt-24">
-            <SectionHeading icon={User} subtitle="Who am I">Biographical Arc</SectionHeading>
-            
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-              <div className="lg:col-span-7 space-y-8">
-                <motion.p 
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8 }}
-                  viewport={{ once: true }}
-                  className="text-xl md:text-3xl text-white/80 font-display font-light leading-relaxed"
-                >
-                  2nd Year CSE (AI/ML) Student at UEM Jaipur. I view code as <span className="text-white italic">interactive art</span>, building AI-powered tools and Web3 experiences that bridge the gap between imagination and reality.
-                </motion.p>
-                
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-12">
-                  {STATS.map((stat, i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: i * 0.1 }}
-                      viewport={{ once: true }}
-                      whileHover={{ y: -5 }}
-                      className="p-6 rounded-2xl bg-brand-card/40 backdrop-blur-xl border border-brand-border"
-                    >
-                      <div className="mb-4">{stat.icon}</div>
-                      <div className="text-3xl font-display font-bold mb-1">{stat.value}</div>
-                      <div className="text-[10px] uppercase tracking-widest font-semibold text-white/40">{stat.label}</div>
-                    </motion.div>
+                {/* Featured Blog Posts Section */}
+                <section className="max-w-7xl mx-auto px-6 py-32 relative z-10">
+                   <SectionHeading icon={TrendingUp} subtitle="Knowledge Share">Featured Articles</SectionHeading>
+                   <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                     {featuredPosts.map((post, i) => (
+                       <Link key={i} to={`/blog/${post.slug}`} className="group relative flex flex-col bg-brand-card/40 backdrop-blur-xl border border-white/5 rounded-3xl p-8 hover:border-white/20 transition-all">
+                         <div className="text-[10px] font-bold text-blue-400 uppercase tracking-widest mb-4">{post.category}</div>
+                         <h3 className="text-xl font-display font-bold mb-4 group-hover:text-blue-400 transition-colors line-clamp-2">{post.title}</h3>
+                         <p className="text-white/40 text-sm line-clamp-3 mb-6 flex-1">{post.description}</p>
+                         <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-white/20 group-hover:text-white transition-colors">
+                           Read Article <ChevronRight size={14} />
+                         </div>
+                       </Link>
+                     ))}
+                   </div>
+                   <div className="flex justify-center mt-12">
+                     <Link to="/blog" className="px-8 py-4 rounded-full bg-white/5 border border-white/10 text-[10px] font-bold uppercase tracking-widest hover:bg-white/10 transition-colors">
+                       View All Articles
+                     </Link>
+                   </div>
+                </section>
+
+                <section id="journey" className="max-w-7xl mx-auto px-6 py-32 relative z-10 scroll-mt-24">
+                  <SectionHeading icon={Briefcase} subtitle="Experience">Timeline & Focus</SectionHeading>
+                  <div className="relative h-[600px] w-full bg-brand-card/20 rounded-3xl border border-brand-border overflow-hidden backdrop-blur-sm">
+                    <RadialOrbitalTimeline timelineData={JOURNEY_TIMELINE} />
+                  </div>
+                </section>
+
+                <section id="works" className="max-w-7xl mx-auto px-6 py-32 relative z-10 scroll-mt-24">
+                  <SectionHeading icon={Briefcase} subtitle="Portfolio">Selected Works</SectionHeading>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 auto-rows-[380px]">
+                    {PROJECTS.map((project, i) => (
+                      <ProjectCard key={i} project={project} />
+                    ))}
+                  </div>
+                </section>
+
+                {/* Newsletter Section */}
+                <section className="max-w-7xl mx-auto px-6 py-32 relative z-10">
+                  <div className="p-12 md:p-20 rounded-[3rem] bg-gradient-to-br from-blue-500/10 to-purple-500/10 border border-white/5 backdrop-blur-xl text-center">
+                    <div className="inline-block p-4 rounded-2xl bg-white/5 border border-white/10 mb-8">
+                      <Mail size={32} className="text-blue-400" />
+                    </div>
+                    <h2 className="text-4xl md:text-6xl font-display font-black tracking-tighter mb-6">Stay in the <span className="text-white/40 italic">Loop</span>.</h2>
+                    <p className="text-lg text-white/60 mb-12 max-w-2xl mx-auto font-display font-light">
+                      Get the latest engineering notes, AI research, and Web3 insights delivered straight to your inbox. No spam, just pure technical value.
+                    </p>
+                    <form className="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto">
+                      <input type="email" placeholder="Enter your email" className="flex-1 px-8 py-5 bg-white/5 border border-white/10 rounded-2xl focus:outline-none focus:border-blue-500 transition-colors" />
+                      <button className="px-10 py-5 bg-white text-black rounded-2xl font-bold uppercase tracking-widest text-[10px] hover:scale-105 transition-transform">
+                        Subscribe
+                      </button>
+                    </form>
+                  </div>
+                </section>
+              </div>
+            </main>
+
+            <footer className="max-w-7xl mx-auto px-6 py-20 border-t border-white/5 relative z-10">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
+                <div className="md:col-span-2">
+                   <div className="text-2xl font-display font-black tracking-tighter mb-6">SM<span className="text-white/40">.</span></div>
+                   <p className="text-white/40 text-sm max-w-xs leading-relaxed">
+                     A digital space dedicated to building high-value content at the intersection of AI, Web3, and Software Engineering.
+                   </p>
+                </div>
+                <div>
+                  <h4 className="text-[10px] font-bold uppercase tracking-widest text-white/60 mb-6">Explore</h4>
+                  <ul className="space-y-4 text-xs text-white/30 font-bold uppercase tracking-widest">
+                    <li><Link to="/about" className="hover:text-white transition-colors">About</Link></li>
+                    <li><Link to="/blog" className="hover:text-white transition-colors text-blue-400">Blog</Link></li>
+                    <li><Link to="/projects" className="hover:text-white transition-colors">Projects</Link></li>
+                    <li><Link to="/contact" className="hover:text-white transition-colors">Contact</Link></li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="text-[10px] font-bold uppercase tracking-widest text-white/60 mb-6">Legal</h4>
+                  <ul className="space-y-4 text-xs text-white/30 font-bold uppercase tracking-widest">
+                    <li><Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
+                    <li><Link to="/terms" className="hover:text-white transition-colors">Terms</Link></li>
+                    <li><Link to="/disclaimer" className="hover:text-white transition-colors">Disclaimer</Link></li>
+                  </ul>
+                </div>
+              </div>
+              <div className="flex flex-col md:flex-row justify-between items-center pt-12 border-t border-white/5 gap-6">
+                <div className="text-[10px] font-bold text-white/10 uppercase tracking-[0.4em]">© 2026 Sujoy Moulick. All Rights Reserved.</div>
+                <div className="flex gap-6">
+                  {[Github, Linkedin, Twitter].map((Icon, i) => (
+                    <a key={i} href="#" className="text-white/20 hover:text-white transition-colors">
+                      <Icon size={18} />
+                    </a>
                   ))}
                 </div>
               </div>
-              
-              <motion.div 
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: true }}
-                className="lg:col-span-5 relative group"
-              >
-                <div className="aspect-square rounded-3xl overflow-hidden grayscale hover:grayscale-0 transition-all duration-700 border border-white/5 relative">
-                  <img 
-                    src={sujoyProfileImg} 
-                    alt="Sujoy Moulick" 
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 object-top" 
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                </div>
-                <motion.div 
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5, duration: 0.5 }}
-                  viewport={{ once: true }}
-                  className="absolute -bottom-6 -right-6 p-8 glass rounded-3xl hidden md:block"
-                >
-                  <div className="text-sm font-display font-medium text-white/60">Creative</div>
-                  <div className="text-lg font-bold italic text-white/90">Engineer</div>
-                </motion.div>
-              </motion.div>
-            </div>
-          </section>
-
-          <section id="journey" className="max-w-7xl mx-auto px-6 py-32 relative z-10 scroll-mt-24">
-            <SectionHeading icon={Briefcase} subtitle="Experience">Timeline & Focus</SectionHeading>
-            
-            <div className="relative h-[600px] w-full bg-brand-card/20 rounded-3xl border border-brand-border overflow-hidden backdrop-blur-sm">
-              {/* Decorative elements */}
-              <div className="absolute top-8 left-8 z-20 flex flex-col gap-2">
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-white/40">Interactive Radial Trace</span>
-                </div>
-                <div className="text-[10px] text-white/20 italic">Select nodes to expand chronological data</div>
-              </div>
-
-              <div className="absolute bottom-8 right-8 z-20 flex flex-col items-end gap-2 text-right">
-                <div className="text-[10px] font-bold uppercase tracking-widest text-white/40">Orbiting Matrix</div>
-                <div className="text-[10px] text-white/20">Click empty space to reset rotation</div>
-              </div>
-
-              <RadialOrbitalTimeline timelineData={JOURNEY_TIMELINE} />
-            </div>
-          </section>
-
-          {/* Section 3: Tech Stack */}
-          <section id="stack" className="max-w-7xl mx-auto px-6 py-32 relative z-10 scroll-mt-24">
-            <SectionHeading icon={Cpu} subtitle="Specialization">Tech Stack</SectionHeading>
-            
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-              <div className="lg:col-span-5 flex justify-center order-2 lg:order-1">
-                <OrbitingSkills />
-              </div>
-              
-              <div className="lg:col-span-7 space-y-12 order-1 lg:order-2">
-                <div className="space-y-4">
-                  <h3 className="text-2xl md:text-4xl font-display font-bold tracking-tight">Tools of the Trade</h3>
-                  <p className="text-lg text-white/60 leading-relaxed max-w-2xl">
-                    I leverage a modern, performance-oriented stack to turn complex problems into seamless digital experiences. From rapid frontend prototyping to robust backend architecture and blockchain smart contracts.
-                  </p>
-                </div>
-
-                <div className="space-y-6">
-                  <Marquee pauseOnHover className="[--duration:20s]">
-                    {TECHNOLOGIES.slice(0, 7).map((tech, i) => (
-                      <Badge
-                        key={tech.name}
-                        className={`${tech.color} rounded-full px-6 py-2 text-[10px] font-bold uppercase tracking-widest text-white border-none shadow-lg`}
-                      >
-                        {tech.name}
-                      </Badge>
-                    ))}
-                  </Marquee>
-                  <Marquee reverse pauseOnHover className="[--duration:25s]">
-                    {TECHNOLOGIES.slice(7).map((tech, i) => (
-                      <Badge
-                        key={tech.name}
-                        className={`${tech.color} rounded-full px-6 py-2 text-[10px] font-bold uppercase tracking-widest text-white border-none shadow-lg`}
-                      >
-                        {tech.name}
-                      </Badge>
-                    ))}
-                  </Marquee>
-                </div>
-
-                <div className="grid grid-cols-2 gap-4 pt-4">
-                  <div className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
-                    <div className="text-[10px] uppercase tracking-widest font-bold text-white/30 mb-2">Frontend</div>
-                    <div className="text-sm font-medium text-white/80">React, Next.js, Framer Motion, Tailwind, Three.js</div>
-                  </div>
-                  <div className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
-                    <div className="text-[10px] uppercase tracking-widest font-bold text-white/30 mb-2">Backend</div>
-                    <div className="text-sm font-medium text-white/80">Node.js, Supabase, PostgreSQL, Solidity</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-
-          {/* TRANSITION TO DARK ANIMATED BG ZONE */}
-          <div className="relative bg-brand-bg min-h-screen overflow-hidden">
-             {/* Subtle animated overlay for later sections */}
-             <div className="absolute inset-0 pointer-events-none overflow-hidden">
-               {/* Moving Glows */}
-               <motion.div 
-                 animate={{ 
-                   x: [0, 100, 0], 
-                   y: [0, -50, 0],
-                   scale: [1, 1.2, 1]
-                 }}
-                 transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                 className="absolute top-1/4 -left-20 w-[600px] h-[600px] bg-blue-500/5 blur-[120px] rounded-full"
-               />
-               <motion.div 
-                 animate={{ 
-                   x: [0, -100, 0], 
-                   y: [0, 50, 0],
-                   scale: [1, 1.1, 1]
-                 }}
-                 transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-                 className="absolute bottom-1/4 -right-20 w-[600px] h-[600px] bg-purple-500/5 blur-[120px] rounded-full"
-               />
-               
-               <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,_rgba(255,255,255,0.02)_1px,_transparent_1px)] bg-[length:60px_60px]" />
-               <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black" />
-             </div>
-
-            {/* Certificates Section */}
-            <section id="certifications" className="py-32 border-y border-white/5 relative z-10 bg-black/20 scroll-mt-24">
-              <div className="max-w-7xl mx-auto px-6 mb-12">
-                <SectionHeading icon={Award} subtitle="Validated">Certifications</SectionHeading>
-              </div>
-              
-              <div className="max-w-5xl mx-auto px-6 flex justify-center">
-                <CardStack 
-                  items={CERTIFICATES} 
-                  autoAdvance 
-                  intervalMs={4000}
-                  cardWidth={isMobile ? width - 32 : 640}
-                  cardHeight={isMobile ? (width - 32) * 0.7 : 440}
-                  perspectivePx={1500}
-                  depthPx={isMobile ? 80 : 200}
-                  spreadDeg={isMobile ? 20 : 40}
-                  overlap={isMobile ? 0.6 : 0.5}
-                />
-              </div>
-
-              <div className="max-w-7xl mx-auto px-6 mt-20 flex justify-center">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8 }}
-                  viewport={{ once: true }}
-                >
-                  <Link 
-                    to="/certifications"
-                    className="group relative flex items-center gap-4 px-10 py-5 bg-white/5 border border-white/10 rounded-full font-bold text-xs uppercase tracking-widest text-white/60 hover:text-white hover:border-white/20 transition-all overflow-hidden"
-                  >
-                    <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                    <span className="relative z-10">More Certifications</span>
-                    <Award className="relative z-10 w-4 h-4 group-hover:rotate-12 transition-transform" />
-                  </Link>
-                </motion.div>
-              </div>
-            </section>
-
-            {/* Work Section */}
-            <section id="works" className="max-w-7xl mx-auto px-6 py-32 relative z-10 scroll-mt-24">
-              <SectionHeading icon={Briefcase} subtitle="Portfolio">Selected Works</SectionHeading>
-              
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 auto-rows-[420px] md:auto-rows-[380px]">
-                {PROJECTS.map((project, i) => (
-                  <ProjectCard key={i} project={project} />
-                ))}
-                
-                {/* View More Projects Button */}
-                <div className="col-span-1 sm:col-span-2 lg:col-span-6 flex justify-center mt-8">
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
-                    viewport={{ once: true }}
-                  >
-                    <Link 
-                      to="/projects"
-                      className="group relative flex items-center gap-4 px-10 py-5 bg-white/5 border border-white/10 rounded-full font-bold text-xs uppercase tracking-widest text-white/60 hover:text-white hover:border-white/20 transition-all overflow-hidden"
-                    >
-                      <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                      <span className="relative z-10">View More Projects</span>
-                      <Briefcase className="relative z-10 w-4 h-4 group-hover:rotate-12 transition-transform" />
-                    </Link>
-                  </motion.div>
-                </div>
-              </div>
-            </section>
-
-            {/* Contact Section */}
-            <section id="contact" className="max-w-7xl mx-auto px-6 py-32 relative z-10 scroll-mt-24">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
-                <div>
-                  <SectionHeading icon={Mail} subtitle="Connect">Get in Touch</SectionHeading>
-                  <p className="text-xl text-white/60 font-display font-light leading-relaxed mb-12">
-                    Have a vision you'd like to bring to life? Whether it's a decentralized platform or an AI integration, let's build something beautiful.
-                  </p>
-                  
-                  <div className="space-y-6">
-                    <div className="flex items-center gap-4 text-white hover:text-white transition-colors">
-                      <div className="p-4 rounded-xl bg-white/5 border border-white/10">
-                        <Mail size={20} className="text-white/40" />
-                      </div>
-                      <div>
-                        <div className="text-[10px] uppercase tracking-widest text-white/40 font-bold">Email</div>
-                        <div className="font-display font-medium">sujoymoulick05@gmail.com</div>
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-center gap-6 pt-8">
-                      {[
-                        { icon: <Github size={24} />, href: "https://github.com/Sujoymoulick" },
-                        { icon: <Linkedin size={24} />, href: "https://www.linkedin.com/in/sujoymoulick/" }
-                      ].map((social, i) => (
-                        <motion.a 
-                          key={i}
-                          href={social.href}
-                          whileHover={{ scale: 1.2, color: '#FFFFFF' }}
-                          className="text-white/20 transition-colors"
-                        >
-                          {social.icon}
-                        </motion.a>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                <motion.div 
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  className="p-8 md:p-12 rounded-3xl bg-brand-card/80 backdrop-blur-xl border border-white/10 shadow-2xl"
-                >
-                  <form className="space-y-6" onSubmit={onContactSubmit}>
-                    <div className="space-y-2">
-                      <label className="text-[10px] uppercase tracking-[0.2em] font-bold text-white/40 ml-1">Full Name</label>
-                      <input 
-                        type="text" 
-                        name="name"
-                        required
-                        placeholder="Enter your name"
-                        className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white focus:outline-none focus:border-white/30 transition-all placeholder:text-white/10"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-[10px] uppercase tracking-[0.2em] font-bold text-white/40 ml-1">Email Address</label>
-                      <input 
-                        type="email" 
-                        name="email"
-                        required
-                        placeholder="name@example.com"
-                        className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white focus:outline-none focus:border-white/30 transition-all placeholder:text-white/10"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-[10px] uppercase tracking-[0.2em] font-bold text-white/40 ml-1">Message</label>
-                      <textarea 
-                        rows={4}
-                        name="message"
-                        required
-                        placeholder="Tell me about your project..."
-                        className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white focus:outline-none focus:border-white/30 transition-all placeholder:text-white/10 resize-none"
-                      ></textarea>
-                    </div>
-                    <motion.button
-                      type="submit"
-                      disabled={formResult === "Sending..."}
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      className="w-full py-5 bg-white text-black rounded-xl font-bold uppercase tracking-widest text-xs flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      {formResult === "Sending..." ? <Loader2 className="w-4 h-4 animate-spin" /> : "Send Message"}
-                    </motion.button>
-                    {formResult && formResult !== "Sending..." && (
-                      <p className={`text-center text-[10px] font-bold uppercase tracking-[0.2em] mt-4 ${formResult.includes("Error") || formResult.includes("occurred") ? "text-red-400" : "text-green-400"}`}>
-                        {formResult}
-                      </p>
-                    )}
-                  </form>
-                </motion.div>
-              </div>
-            </section>
-          </div>
-        </div>
-      </main>
-
-      <footer className="max-w-7xl mx-auto px-6 py-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 relative z-10">
-        <div className="text-[10px] font-bold text-white/20 uppercase tracking-[0.3em]">
-          © 2026 Sujoy Moulick. Built with React & Motion.
-        </div>
-        <div className="flex gap-8 text-[9px] font-bold text-white/40 uppercase tracking-[0.2em]">
-          <Link to="/blog" className="hover:text-white transition-colors">Blog</Link>
-          <Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
-          <a href="/#about" className="hover:text-white transition-colors">About</a>
-          <a href="/#contact" className="hover:text-white transition-colors">Contact</a>
-        </div>
-      </footer>
+            </footer>
           </motion.div>
         )}
       </AnimatePresence>
@@ -989,13 +686,18 @@ function Home() {
 export default function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Analytics />
       <TechCursor />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/contact" element={<ContactPage />} />
         <Route path="/certifications" element={<CertificationsPage />} />
         <Route path="/projects" element={<ProjectsPage />} />
         <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+        <Route path="/terms" element={<TermsPage />} />
+        <Route path="/disclaimer" element={<DisclaimerPage />} />
         <Route path="/blog" element={<Suspense fallback={null}><Blog /></Suspense>} />
         <Route path="/blog/:slug" element={<Suspense fallback={null}><BlogPost /></Suspense>} />
       </Routes>
