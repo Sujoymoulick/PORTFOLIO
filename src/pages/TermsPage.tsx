@@ -114,6 +114,13 @@ const TermsPage = () => {
         </div>
 
         <footer className="mt-32 pt-12 border-t border-white/5 text-center">
+          <div className="flex flex-wrap justify-center gap-6 mb-8">
+            <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest">Legal</span>
+            <span className="text-white/10">·</span>
+            <Link to="/privacy-policy" className="text-[10px] font-bold text-white/40 uppercase tracking-widest hover:text-white transition-colors">Privacy Policy</Link>
+            <Link to="/terms" className="text-[10px] font-bold text-white uppercase tracking-widest hover:text-blue-400 transition-colors">Terms</Link>
+            <Link to="/disclaimer" className="text-[10px] font-bold text-white/40 uppercase tracking-widest hover:text-white transition-colors">Disclaimer</Link>
+          </div>
           <p className="text-[10px] font-bold text-white/20 uppercase tracking-[0.4em]">
             © 2026 Sujoy Moulick. All Rights Reserved.
           </p>
