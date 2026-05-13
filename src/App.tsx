@@ -616,7 +616,49 @@ function Home() {
                       <ProjectCard key={i} project={project} />
                     ))}
                   </div>
-                </section>
+                 </section>
+
+                 <section id="stack" className="max-w-7xl mx-auto px-6 py-32 relative z-10 scroll-mt-24">
+                   <SectionHeading icon={Cpu} subtitle="Technologies">My Tech Stack</SectionHeading>
+                   <div className="space-y-8">
+                     <Marquee pauseOnHover className="[--duration:30s]">
+                       {TECHNOLOGIES.map((tech, i) => (
+                         <div key={i} className="flex items-center gap-3 px-6 py-3 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md">
+                           <div className={`w-2 h-2 rounded-full ${tech.color}`} />
+                           <span className="text-[11px] font-bold uppercase tracking-widest text-white/60">{tech.name}</span>
+                         </div>
+                       ))}
+                     </Marquee>
+                     <Marquee pauseOnHover reverse className="[--duration:25s]">
+                       {[...TECHNOLOGIES].reverse().map((tech, i) => (
+                         <div key={i} className="flex items-center gap-3 px-6 py-3 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md">
+                           <div className={`w-2 h-2 rounded-full ${tech.color}`} />
+                           <span className="text-[11px] font-bold uppercase tracking-widest text-white/60">{tech.name}</span>
+                         </div>
+                       ))}
+                     </Marquee>
+                     <div className="relative h-[500px] w-full bg-brand-card/20 rounded-3xl border border-brand-border overflow-hidden backdrop-blur-sm mt-12">
+                       <OrbitingSkills />
+                     </div>
+                   </div>
+                 </section>
+
+                 <section id="certifications" className="max-w-7xl mx-auto px-6 py-32 relative z-10 scroll-mt-24">
+                   <SectionHeading icon={Award} subtitle="Credentials">Certifications</SectionHeading>
+                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                     <div>
+                       <p className="text-xl text-white/50 font-display font-light leading-relaxed mb-8">
+                         A curated set of credentials across AI, Cloud, and Software Engineering — validating depth of knowledge across the stack.
+                       </p>
+                       <Link to="/certifications" className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-white/40 hover:text-white transition-colors border border-white/10 px-6 py-3 rounded-full hover:border-white/30">
+                         View All Certifications <ArrowRight size={12} />
+                       </Link>
+                     </div>
+                     <div className="flex justify-center items-center h-[420px]">
+                       <CardStack items={CERTIFICATES} />
+                     </div>
+                   </div>
+                 </section>
 
                 {/* Newsletter Section */}
                 <section className="max-w-7xl mx-auto px-6 py-32 relative z-10">
