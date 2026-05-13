@@ -518,13 +518,16 @@ const Navbar = () => {
 function Home() {
   const { width } = useWindowSize();
   const isMobile = width < 768;
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(() => !sessionStorage.getItem('sm_site_loaded'));
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 4500);
-    return () => clearTimeout(timer);
+    if (isLoading) {
+      const timer = setTimeout(() => {
+        setIsLoading(false);
+        sessionStorage.setItem('sm_site_loaded', 'true');
+      }, 4500);
+      return () => clearTimeout(timer);
+    }
   }, []);
 
   const featuredPosts = BLOG_POSTS.slice(0, 3);
@@ -725,24 +728,45 @@ function Home() {
   );
 }
 
+// Smooth fade+slide wrapper for every page
+const PageTransition = ({ children }: { children: React.ReactNode }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 16 }}
+    animate={{ opacity: 1, y: 0 }}
+    exit={{ opacity: 0, y: -16 }}
+    transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+  >
+    {children}
+  </motion.div>
+);
+
+function AppRoutes() {
+  const location = useLocation();
+  return (
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<PageTransition><AboutPage /></PageTransition>} />
+        <Route path="/contact" element={<PageTransition><ContactPage /></PageTransition>} />
+        <Route path="/certifications" element={<PageTransition><CertificationsPage /></PageTransition>} />
+        <Route path="/projects" element={<PageTransition><ProjectsPage /></PageTransition>} />
+        <Route path="/privacy-policy" element={<PageTransition><PrivacyPolicyPage /></PageTransition>} />
+        <Route path="/terms" element={<PageTransition><TermsPage /></PageTransition>} />
+        <Route path="/disclaimer" element={<PageTransition><DisclaimerPage /></PageTransition>} />
+        <Route path="/blog" element={<PageTransition><Suspense fallback={null}><Blog /></Suspense></PageTransition>} />
+        <Route path="/blog/:slug" element={<PageTransition><Suspense fallback={null}><BlogPost /></Suspense></PageTransition>} />
+      </Routes>
+    </AnimatePresence>
+  );
+}
+
 export default function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
       <Analytics />
       <TechCursor />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/contact" element={<ContactPage />} />
-        <Route path="/certifications" element={<CertificationsPage />} />
-        <Route path="/projects" element={<ProjectsPage />} />
-        <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
-        <Route path="/terms" element={<TermsPage />} />
-        <Route path="/disclaimer" element={<DisclaimerPage />} />
-        <Route path="/blog" element={<Suspense fallback={null}><Blog /></Suspense>} />
-        <Route path="/blog/:slug" element={<Suspense fallback={null}><BlogPost /></Suspense>} />
-      </Routes>
+      <AppRoutes />
     </BrowserRouter>
   );
 }
