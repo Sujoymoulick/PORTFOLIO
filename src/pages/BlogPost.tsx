@@ -29,11 +29,13 @@ export default function BlogPost() {
   const [activeHeading, setActiveHeading] = useState('');
 
   // Extract headings for Table of Contents
-  const headings = post?.content.match(/^#{2,3} .+/gm)?.map(h => ({
-    text: h.replace(/^#{2,3} /, ''),
-    level: h.startsWith('###') ? 3 : 2,
-    id: h.replace(/^#{2,3} /, '').toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-')
-  })) || [];
+  const headings = React.useMemo(() => {
+    return post?.content.match(/^#{2,3} .+/gm)?.map(h => ({
+      text: h.replace(/^#{2,3} /, ''),
+      level: h.startsWith('###') ? 3 : 2,
+      id: h.replace(/^#{2,3} /, '').toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-')
+    })) || [];
+  }, [post]);
 
   useEffect(() => {
     window.scrollTo(0, 0);

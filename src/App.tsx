@@ -9,10 +9,10 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Link, BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import CertificationsPage from './pages/CertificationsPage';
 import ProjectsPage from './pages/ProjectsPage';
+import LiveProjectsPage from './pages/LiveProjectsPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import TermsPage from './pages/TermsPage';
 import DisclaimerPage from './pages/DisclaimerPage';
-import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import { Suspense, lazy } from 'react';
 
@@ -444,16 +444,61 @@ const Navbar = () => {
           </Link>
           
           <div className="hidden md:flex items-center gap-8 text-[10px] font-bold uppercase tracking-[0.2em] text-white/40">
-            {['About', 'Journey', 'Stack', 'Works', 'Certifications', 'Contact'].map(item => (
+            {['About', 'Journey', 'Stack'].map(item => (
               <a 
                 key={item} 
-                href={item === 'About' || item === 'Contact' ? `/${item.toLowerCase()}` : `/#${item.toLowerCase()}`}
+                href={`/#${item.toLowerCase()}`}
                 className="hover:text-white transition-colors"
               >
                 {item}
               </a>
             ))}
-            <Link to="/blog" className="hover:text-white transition-colors text-blue-400">Blog</Link>
+
+            {/* Works Hover Dropdown */}
+            <div className="relative group py-2">
+              <span className="hover:text-white transition-colors flex items-center gap-1 cursor-pointer">
+                Works <ChevronDown size={10} className="group-hover:rotate-180 transition-transform duration-300 text-white/40" />
+              </span>
+              <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-48 rounded-2xl bg-black/90 border border-white/10 backdrop-blur-md p-2 shadow-2xl opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-300 z-50 before:content-[''] before:absolute before:-top-3 before:left-0 before:right-0 before:h-3">
+                <a 
+                  href="/#works" 
+                  className="block px-4 py-3 rounded-xl text-white/60 hover:text-white hover:bg-white/5 transition-all text-[9px] font-bold uppercase tracking-widest text-center"
+                >
+                  Featured Works
+                </a>
+                <Link 
+                  to="/live-projects" 
+                  className="block px-4 py-3 rounded-xl text-white/60 hover:text-white hover:bg-white/5 transition-all text-[9px] font-bold uppercase tracking-widest text-center"
+                >
+                  Live Projects
+                </Link>
+              </div>
+            </div>
+
+            <a href="/#certifications" className="hover:text-white transition-colors">Certifications</a>
+
+            {/* Contact Hover Dropdown */}
+            <div className="relative group py-2">
+              <span className="hover:text-white transition-colors flex items-center gap-1 cursor-pointer">
+                Contact <ChevronDown size={10} className="group-hover:rotate-180 transition-transform duration-300 text-white/40" />
+              </span>
+              <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-48 rounded-2xl bg-black/90 border border-white/10 backdrop-blur-md p-2 shadow-2xl opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-300 z-50 before:content-[''] before:absolute before:-top-3 before:left-0 before:right-0 before:h-3">
+                <Link 
+                  to="/contact" 
+                  className="block px-4 py-3 rounded-xl text-white/60 hover:text-white hover:bg-white/5 transition-all text-[9px] font-bold uppercase tracking-widest text-center"
+                >
+                  Contact Form
+                </Link>
+                <Link 
+                  to="/#linkedin-feed" 
+                  className="block px-4 py-3 rounded-xl text-white/60 hover:text-white hover:bg-white/5 transition-all text-[9px] font-bold uppercase tracking-widest text-center"
+                >
+                  LinkedIn Posts
+                </Link>
+              </div>
+            </div>
+
+            <Link to="/blog" className="hover:text-white transition-colors text-blue-400 font-bold uppercase tracking-[0.2em] text-[10px]">Blog</Link>
           </div>
           
           <div className="flex items-center gap-4 relative z-50">
@@ -462,7 +507,8 @@ const Navbar = () => {
             
             <motion.a
               href={resumePdf}
-              download="My_resume_2026.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.05)" }}
               whileTap={{ scale: 0.95 }}
               className="hidden sm:block text-[10px] font-bold uppercase tracking-widest border border-white/20 px-6 py-2.5 rounded-full text-white"
@@ -496,22 +542,86 @@ const Navbar = () => {
             className="fixed inset-0 z-40 bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center pt-20"
           >
             <div className="flex flex-col items-center gap-8 text-sm font-bold uppercase tracking-[0.3em] text-white/70">
-              {['About', 'Journey', 'Stack', 'Works', 'Certifications', 'Contact'].map(item => (
+              {['About', 'Journey', 'Stack'].map(item => (
                 <Link 
                   key={item} 
-                  to={item === 'About' || item === 'Contact' ? `/${item.toLowerCase()}` : `/#${item.toLowerCase()}`}
+                  to={`/#${item.toLowerCase()}`}
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="hover:text-white transition-colors py-2"
                 >
                   {item}
                 </Link>
               ))}
+
+              {/* Mobile Works Sub-Items */}
+              <div className="flex flex-col items-center gap-4 py-2 border-y border-white/5 w-full">
+                <span className="text-[10px] font-bold uppercase tracking-widest text-white/30">Works</span>
+                <Link 
+                  to="/#works" 
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="hover:text-white text-white/70 transition-colors py-1 text-xs"
+                >
+                  Featured Works
+                </Link>
+                <Link 
+                  to="/live-projects" 
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="hover:text-white text-white/70 transition-colors py-1 text-xs"
+                >
+                  Live Projects
+                </Link>
+              </div>
+
+              <Link 
+                to="/#certifications"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="hover:text-white transition-colors py-2"
+              >
+                Certifications
+              </Link>
+              
+              {/* Mobile Contact Sub-Items */}
+              <div className="flex flex-col items-center gap-4 py-2 border-y border-white/5 w-full">
+                <span className="text-[10px] font-bold uppercase tracking-widest text-white/30">Contact</span>
+                <Link 
+                  to="/contact" 
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="hover:text-white text-white/70 transition-colors py-1 text-xs"
+                >
+                  Contact Form
+                </Link>
+                <Link 
+                  to="/#linkedin-feed" 
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="hover:text-white text-white/70 transition-colors py-1 text-xs"
+                >
+                  LinkedIn Posts
+                </Link>
+              </div>
+
               <Link to="/blog" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-white transition-colors py-2 text-blue-400">Blog</Link>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
     </>
+  );
+};
+
+const LinkedInWidget = () => {
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = "https://widgets.sociablekit.com/linkedin-profile-posts/widget.js";
+    script.defer = true;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
+  return (
+    <div className="sk-ww-linkedin-profile-post" data-embed-id="25690270"></div>
   );
 };
 
@@ -563,6 +673,9 @@ function Home() {
                     <div className="lg:col-span-7 space-y-8">
                       <motion.p className="text-xl md:text-3xl text-white/80 font-display font-light leading-relaxed">
                         2nd Year CSE (AI/ML) Student at UEM Jaipur. I view code as <span className="text-white italic">interactive art</span>, building AI-powered tools and Web3 experiences.
+                      </motion.p>
+                      <motion.p className="text-base md:text-lg text-white/50 font-display font-light leading-relaxed">
+                        Beyond AI, I design and build highly performant web architectures, combining full-stack technologies with modern UI animations. I also bridge engineering and growth by leveraging search engine optimization (SEO), digital marketing analytics, and content distribution to make sure high-value technical products get in front of the right audience.
                       </motion.p>
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-12">
                         {STATS.map((stat, i) => (
@@ -657,10 +770,18 @@ function Home() {
                          View All Certifications <ArrowRight size={12} />
                        </Link>
                      </div>
-                     <div className="flex justify-center items-center h-[420px]">
+                     <div className="flex justify-center items-center h-[340px] md:h-[420px]">
                        <CardStack items={CERTIFICATES} />
                      </div>
                    </div>
+                 </section>
+
+                 {/* LinkedIn Posts Section */}
+                 <section id="linkedin-feed" className="max-w-7xl mx-auto px-6 py-32 relative z-10 scroll-mt-24">
+                    <SectionHeading icon={Linkedin} subtitle="Social Feed">LinkedIn Posts</SectionHeading>
+                    <div className="w-full bg-zinc-900/30 backdrop-blur-sm rounded-3xl border border-white/5 p-4 md:p-8 max-h-[800px] overflow-y-auto overflow-x-hidden scrollbar-thin">
+                      <LinkedInWidget />
+                    </div>
                  </section>
 
                 {/* Newsletter Section */}
@@ -695,10 +816,12 @@ function Home() {
                 <div>
                   <h4 className="text-[10px] font-bold uppercase tracking-widest text-white/60 mb-6">Explore</h4>
                   <ul className="space-y-4 text-xs text-white/30 font-bold uppercase tracking-widest">
-                    <li><Link to="/about" className="hover:text-white transition-colors">About</Link></li>
+                    <li><Link to="/#about" className="hover:text-white transition-colors">About</Link></li>
                     <li><Link to="/blog" className="hover:text-white transition-colors text-blue-400">Blog</Link></li>
                     <li><Link to="/projects" className="hover:text-white transition-colors">Projects</Link></li>
-                    <li><Link to="/contact" className="hover:text-white transition-colors">Contact</Link></li>
+                    <li><Link to="/live-projects" className="hover:text-white transition-colors text-blue-400">Live Projects</Link></li>
+                    <li><Link to="/contact" className="hover:text-white transition-colors">Contact Form</Link></li>
+                    <li><Link to="/#linkedin-feed" className="hover:text-white transition-colors">LinkedIn Posts</Link></li>
                   </ul>
                 </div>
                 <div>
@@ -746,8 +869,8 @@ function AppRoutes() {
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Home />} />
-        <Route path="/about" element={<PageTransition><AboutPage /></PageTransition>} />
         <Route path="/contact" element={<PageTransition><ContactPage /></PageTransition>} />
+        <Route path="/live-projects" element={<PageTransition><LiveProjectsPage /></PageTransition>} />
         <Route path="/certifications" element={<PageTransition><CertificationsPage /></PageTransition>} />
         <Route path="/projects" element={<PageTransition><ProjectsPage /></PageTransition>} />
         <Route path="/privacy-policy" element={<PageTransition><PrivacyPolicyPage /></PageTransition>} />

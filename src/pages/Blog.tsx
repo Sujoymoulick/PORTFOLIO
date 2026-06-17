@@ -161,9 +161,11 @@ export default function Blog() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {currentPosts.map((post, i) => (
-              <motion.div
-                key={post.slug}
+            {currentPosts
+              .filter((_, idx) => !(currentPage === 1 && searchQuery === '' && selectedCategory === 'All' && idx === 0))
+              .map((post, i) => (
+                <motion.div
+                  key={post.slug}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: i * 0.1 }}

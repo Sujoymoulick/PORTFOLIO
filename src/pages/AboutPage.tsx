@@ -57,7 +57,7 @@ const AboutPage = () => {
                 My journey into technology began with a simple curiosity: how do things work under the hood? This curiosity led me to explore the worlds of frontend development, decentralized systems, and artificial intelligence.
               </p>
               <p>
-                Today, I focus on building high-performance applications using **React**, **Next.js**, and **Supabase**. I'm particularly interested in how AI can be integrated into everyday tools to enhance human productivity and creativity.
+                Today, I focus on building high-performance applications using **React**, **Next.js**, and **Supabase**, aiming for visually stunning and highly optimized web experiences. Alongside technical development, I'm passionate about digital marketing and content distribution. I leverage SEO, growth strategy, and analytics to ensure that complex software and products gain the visibility and engagement they deserve.
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
                 <div className="p-8 rounded-3xl bg-white/5 border border-white/10">
@@ -102,6 +102,7 @@ const AboutPage = () => {
                   { name: 'Frontend Architecture', level: 95 },
                   { name: 'AI Integration', level: 85 },
                   { name: 'Web3 & Blockchain', level: 80 },
+                  { name: 'SEO & Growth Marketing', level: 85 },
                   { name: 'UI/UX Design', level: 90 },
                 ].map((skill, i) => (
                   <div key={i} className="space-y-2">
