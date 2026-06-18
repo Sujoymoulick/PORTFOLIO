@@ -72,10 +72,21 @@ import resumePdf from '../assets/My_resume_2026.pdf';
 
 // --- Scroll To Top Utility ---
 const ScrollToTop = () => {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+    if (hash) {
+      const id = hash.replace('#', '');
+      const element = document.getElementById(id);
+      if (element) {
+        const timer = setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+        return () => clearTimeout(timer);
+      }
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [pathname, hash]);
   return null;
 };
 
@@ -229,23 +240,23 @@ const PROJECTS = [
     pattern: 'network'
   },
   {
-    title: 'Meghdoot',
-    description: 'Hyper-minimalist weather forecasting app focused on visual clarity.',
-    tags: ['React', 'API'],
+    title: 'VlogToBlog',
+    description: 'Premium full-stack web application converting YouTube videos into SEO-optimized, highly structured blog posts using Gemini AI.',
+    tags: ['React', 'Node.js', 'Gemini AI', 'Firebase'],
     id: '02',
     link: '#',
-    github: 'https://github.com/Sujoymoulick/MEGHDOOT',
+    github: 'https://github.com/Sujoymoulick/VlogToBlog',
     className: 'md:col-span-2',
     visual: <SpeedIndicator />,
     pattern: 'speed'
   },
   {
-    title: 'Textora',
-    description: 'AI-powered content generation suite utilizing Google Gemini API.',
-    tags: ['Next.js', 'AI'],
+    title: 'Resume Generators',
+    description: 'AI-powered resume generation suite utilizing Google Gemini API to craft professional, ATS-friendly resumes in minutes.',
+    tags: ['Next.js', 'AI', 'Gemini'],
     id: '03',
-    link: '#',
-    github: 'https://github.com/Sujoymoulick/TEXTORA',
+    link: 'https://www.resumegenerators.in/',
+    github: '',
     className: 'md:col-span-2 md:row-span-2',
     visual: <TypeTester />,
     pattern: 'type'
@@ -255,32 +266,32 @@ const PROJECTS = [
     description: 'Innovative web application built for seamless user experience.',
     tags: ['React', 'Vite'],
     id: '04',
-    link: 'https://findo-ten.vercel.app/',
+    link: 'https://findo-frontend.vercel.app/',
     github: 'https://github.com/Sujoymoulick/Findo',
     className: 'md:col-span-2',
     visual: <SecurityBadge />,
     pattern: 'security'
   },
   {
-    title: 'Digital Clock',
-    description: '3D-interactive kinetic geometry clock built with creative coding.',
-    tags: ['Three.js', '3D'],
+    title: 'Kinetic Luminary',
+    description: 'A free, high-performance, immersive 3D portfolio template built with Next.js 16, React 19, and Three.js.',
+    tags: ['Next.js', 'React 19', 'Three.js', 'Tailwind'],
     id: '05',
     link: '#',
-    github: 'https://github.com/Sujoymoulick/Digital-clock',
+    github: 'https://github.com/Sujoymoulick/SUNBWMOUNTAINPORTFOLIO',
     className: 'md:col-span-3',
     visual: <LayoutAnimation />,
     pattern: 'layout'
   },
   {
-    title: 'VectorX',
-    description: 'High-performance interactive web application built for speed and precision.',
-    tags: ['React', 'Vite'],
+    title: 'SM Invoice Generator',
+    description: 'A free online invoice generator helping freelancers and small businesses generate and download professional PDF invoices instantly.',
+    tags: ['React', 'Tailwind', 'PDF Gen'],
     id: '06',
-    link: 'https://vector-x-eight.vercel.app/',
-    github: 'https://github.com/Sujoymoulick/VectorX',
+    link: 'https://sm-invoice-generator.vercel.app/',
+    github: '',
     className: 'md:col-span-3',
-    visual: <div className="flex items-center justify-center h-full"><Zap className="w-16 h-16 text-white" /></div>,
+    visual: <div className="flex items-center justify-center h-full"><FileDown className="w-16 h-16 text-white" /></div>,
     pattern: 'vector'
   }
 ];
@@ -409,7 +420,7 @@ const ProjectCard = ({ project, ...props }: { project: typeof PROJECTS[0] } & Re
               Live Demo <ExternalLink size={10} />
             </motion.a>
           )}
-          {project.github && project.github !== '' && (
+          {project.github && project.github !== '' && project.github !== '#' && (
             <motion.a
               href={project.github}
               target="_blank"
@@ -445,13 +456,13 @@ const Navbar = () => {
           
           <div className="hidden md:flex items-center gap-8 text-[10px] font-bold uppercase tracking-[0.2em] text-white/40">
             {['About', 'Journey', 'Stack'].map(item => (
-              <a 
+              <Link 
                 key={item} 
-                href={`/#${item.toLowerCase()}`}
+                to={`/#${item.toLowerCase()}`}
                 className="hover:text-white transition-colors"
               >
                 {item}
-              </a>
+              </Link>
             ))}
 
             {/* Works Hover Dropdown */}
@@ -460,12 +471,12 @@ const Navbar = () => {
                 Works <ChevronDown size={10} className="group-hover:rotate-180 transition-transform duration-300 text-white/40" />
               </span>
               <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-48 rounded-2xl bg-black/90 border border-white/10 backdrop-blur-md p-2 shadow-2xl opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-300 z-50 before:content-[''] before:absolute before:-top-3 before:left-0 before:right-0 before:h-3">
-                <a 
-                  href="/#works" 
+                <Link 
+                  to="/#works" 
                   className="block px-4 py-3 rounded-xl text-white/60 hover:text-white hover:bg-white/5 transition-all text-[9px] font-bold uppercase tracking-widest text-center"
                 >
                   Featured Works
-                </a>
+                </Link>
                 <Link 
                   to="/live-projects" 
                   className="block px-4 py-3 rounded-xl text-white/60 hover:text-white hover:bg-white/5 transition-all text-[9px] font-bold uppercase tracking-widest text-center"
@@ -475,7 +486,7 @@ const Navbar = () => {
               </div>
             </div>
 
-            <a href="/#certifications" className="hover:text-white transition-colors">Certifications</a>
+            <Link to="/#certifications" className="hover:text-white transition-colors">Certifications</Link>
 
             {/* Contact Hover Dropdown */}
             <div className="relative group py-2">
@@ -600,6 +611,18 @@ const Navbar = () => {
               </div>
 
               <Link to="/blog" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-white transition-colors py-2 text-blue-400">Blog</Link>
+
+              <a
+                href={resumePdf}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => {
+                  setTimeout(() => setIsMobileMenuOpen(false), 200);
+                }}
+                className="mt-4 text-[10px] font-bold uppercase tracking-widest border border-white/20 px-8 py-3 rounded-full text-white bg-white/5 active:bg-white/10 active:scale-95 transition-all text-center inline-block"
+              >
+                Download Resume
+              </a>
             </div>
           </motion.div>
         )}

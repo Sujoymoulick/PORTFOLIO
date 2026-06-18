@@ -16,21 +16,21 @@ const ALL_PROJECTS = [
     category: 'Education'
   },
   {
-    title: 'Meghdoot',
-    description: 'Hyper-minimalist weather forecasting app focused on visual clarity and precision data delivery using OpenWeather API.',
-    tags: ['React', 'API', 'Recharts'],
+    title: 'VlogToBlog',
+    description: 'Premium full-stack web application converting YouTube videos into SEO-optimized, highly structured blog posts using Gemini 1.5 Flash and Node.js.',
+    tags: ['React', 'Node.js', 'Gemini AI', 'Firebase'],
     id: '02',
     link: '#',
-    github: '#',
-    category: 'Utility'
+    github: 'https://github.com/Sujoymoulick/VlogToBlog',
+    category: 'AI/ML'
   },
   {
-    title: 'Textora',
-    description: 'AI-powered content generation suite utilizing Google Gemini API for creative writing and semantic analysis.',
+    title: 'Resume Generators',
+    description: 'AI-powered resume generation suite utilizing Google Gemini API to craft professional, ATS-friendly resumes in minutes.',
     tags: ['Next.js', 'AI', 'Gemini'],
     id: '03',
-    link: '#',
-    github: '#',
+    link: 'https://www.resumegenerators.in/',
+    github: 'https://github.com/Sujoymoulick/TEXTORA',
     category: 'AI/ML'
   },
   {
@@ -43,12 +43,12 @@ const ALL_PROJECTS = [
     category: 'Blockchain'
   },
   {
-    title: 'Digital Clock',
-    description: '3D-interactive kinetic geometry clock built with creative coding principles and Three.js performance.',
-    tags: ['Three.js', '3D', 'GLSL'],
+    title: 'Kinetic Luminary',
+    description: 'A free, high-performance, immersive 3D portfolio template built with Next.js 16, React 19, and Three.js featuring fluid animations.',
+    tags: ['Next.js', 'React 19', 'Three.js', 'Tailwind'],
     id: '05',
     link: '#',
-    github: '#',
+    github: 'https://github.com/Sujoymoulick/SUNBWMOUNTAINPORTFOLIO',
     category: 'Creative'
   },
   {
