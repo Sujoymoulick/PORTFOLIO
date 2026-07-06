@@ -1,0 +1,439 @@
+[
+  {
+    "_id": {
+      "$oid": "6a3819a7c6b8cd3912c03360"
+    },
+    "title": "Senior React Developer",
+    "description": "Join our team to construct pixel-perfect, highly animated glassmorphic dashboards using React 19, Vite, and Framer Motion. You will build core interfaces for AI developer tools.",
+    "companyName": "Google DeepMind",
+    "location": "Remote",
+    "type": "Remote",
+    "salary": "$120,000 - $150,000 / yr",
+    "requirements": [
+      "React",
+      "JavaScript",
+      "Tailwind CSS",
+      "Framer Motion",
+      "Vite"
+    ],
+    "employer": {
+      "$oid": "6a3819a7c6b8cd3912c0335f"
+    },
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-06-21T17:04:39.466Z"
+    },
+    "updatedAt": {
+      "$date": "2026-06-21T17:04:39.466Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a3819a7c6b8cd3912c03363"
+    },
+    "title": "Frontend UI/UX Intern",
+    "description": "Accelerate your career by designing fluid interfaces and micro-interactions. You will learn best practices in styling, animations, and responsive web configurations.",
+    "companyName": "Google DeepMind",
+    "location": "London, UK",
+    "type": "Internship",
+    "salary": "£45,000 / yr",
+    "requirements": [
+      "HTML",
+      "CSS",
+      "React",
+      "Framer Motion",
+      "Design Systems"
+    ],
+    "employer": {
+      "$oid": "6a3819a7c6b8cd3912c0335f"
+    },
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-06-21T17:04:39.467Z"
+    },
+    "updatedAt": {
+      "$date": "2026-06-21T17:04:39.467Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a3819a7c6b8cd3912c03361"
+    },
+    "title": "Node.js API Architect",
+    "description": "Design and support enterprise Express.js APIs. You will create database schemas using Mongoose, secure endpoints with JWT, configure Multer file-handling buffers, and optimize route speed.",
+    "companyName": "Google DeepMind",
+    "location": "London, UK",
+    "type": "Full-time",
+    "salary": "£90,000 - £120,000 / yr",
+    "requirements": [
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "Mongoose",
+      "JWT"
+    ],
+    "employer": {
+      "$oid": "6a3819a7c6b8cd3912c0335f"
+    },
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-06-21T17:04:39.467Z"
+    },
+    "updatedAt": {
+      "$date": "2026-06-21T17:04:39.467Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a3819a7c6b8cd3912c03362"
+    },
+    "title": "Full-Stack Software Engineer",
+    "description": "Develop features end-to-end. You will work on React web applications and integrate them with AI models served via Node.js backend controllers and Cloud databases.",
+    "companyName": "Google DeepMind",
+    "location": "Remote",
+    "type": "Contract",
+    "salary": "$95 / hr",
+    "requirements": [
+      "React",
+      "Node.js",
+      "MongoDB",
+      "Python",
+      "WebMCP"
+    ],
+    "employer": {
+      "$oid": "6a3819a7c6b8cd3912c0335f"
+    },
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-06-21T17:04:39.467Z"
+    },
+    "updatedAt": {
+      "$date": "2026-06-21T17:04:39.467Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a3819a7c6b8cd3912c03364"
+    },
+    "title": "Product Manager - AI Tooling",
+    "description": "Own the strategy and lifecycle for our developer products. Work closely with AI researchers, full-stack developers, and client feedback to design premium software developer portals.",
+    "companyName": "Google DeepMind",
+    "location": "London, UK",
+    "type": "Part-time",
+    "salary": "£70,000 / yr",
+    "requirements": [
+      "Agile",
+      "Product Strategy",
+      "Technical Communication",
+      "UI Design"
+    ],
+    "employer": {
+      "$oid": "6a3819a7c6b8cd3912c0335f"
+    },
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-06-21T17:04:39.467Z"
+    },
+    "updatedAt": {
+      "$date": "2026-06-21T17:04:39.467Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a3820650b3929409a282d4c"
+    },
+    "title": "Frontend Developer",
+    "description": "Designing Profitable saas for business",
+    "companyName": "TOOLSPAGE",
+    "location": "West Bengal",
+    "type": "Full-time",
+    "salary": "55",
+    "requirements": [
+      "React",
+      "Node.js",
+      "Tailwind CSS",
+      "Others"
+    ],
+    "employer": {
+      "$oid": "6a381fd50b3929409a282d4b"
+    },
+    "createdAt": {
+      "$date": "2026-06-21T17:33:25.125Z"
+    },
+    "updatedAt": {
+      "$date": "2026-06-21T17:33:25.125Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6a38e53dc8e11d9ba945e3c9"
+    },
+    "title": "UI/UX Product Designer",
+    "description": "Shape the future of collaborative design tools. You will lead design sprints, conduct usability testing, create interactive mockups, and work closely with front-end engineers.",
+    "companyName": "Figma",
+    "location": "Remote",
+    "type": "Remote",
+    "salary": "$110,000 - $140,000",
+    "requirements": [
+      "UI/UX Design",
+      "Figma",
+      "Prototyping",
+      "TailwindCSS"
+    ],
+    "employer": {
+      "$oid": "6a3819a7c6b8cd3912c0335f"
+    },
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-06-22T07:33:17.850Z"
+    },
+    "updatedAt": {
+      "$date": "2026-06-22T07:33:17.850Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a38e53dc8e11d9ba945e3cb"
+    },
+    "title": "Technical Product Manager",
+    "description": "Lead cross-functional engineering teams to define product specifications, scope developer features, and map out quarterly delivery timelines.",
+    "companyName": "Apple",
+    "location": "London, UK",
+    "type": "Full-time",
+    "salary": "£90,000 - £120,000",
+    "requirements": [
+      "Product Manager",
+      "Scrum",
+      "Agile",
+      "Jira"
+    ],
+    "employer": {
+      "$oid": "6a3819a7c6b8cd3912c0335f"
+    },
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-06-22T07:33:17.850Z"
+    },
+    "updatedAt": {
+      "$date": "2026-06-22T07:33:17.850Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a38e53dc8e11d9ba945e3ce"
+    },
+    "title": "Machine Learning Engineer",
+    "description": "Build and train generative text and vision architectures. You will run distributed training runs, optimize model throughput, and deploy low-latency inference endpoints.",
+    "companyName": "OpenAI",
+    "location": "San Francisco, CA",
+    "type": "Full-time",
+    "salary": "$200,000 - $250,005",
+    "requirements": [
+      "Machine Learning",
+      "Python",
+      "Transformers",
+      "PyTorch"
+    ],
+    "employer": {
+      "$oid": "6a3819a7c6b8cd3912c0335f"
+    },
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-06-22T07:33:17.850Z"
+    },
+    "updatedAt": {
+      "$date": "2026-06-22T07:33:17.850Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a38e53dc8e11d9ba945e3ca"
+    },
+    "title": "Python Software Engineer",
+    "description": "Build backend pipelines and data processing services. You will design database schemas, optimize data flows, and build secure endpoints for web applications.",
+    "companyName": "Google",
+    "location": "Mountain View, CA",
+    "type": "Full-time",
+    "salary": "$140,000 - $180,000",
+    "requirements": [
+      "Python",
+      "Django",
+      "PostgreSQL",
+      "SQL"
+    ],
+    "employer": {
+      "$oid": "6a3819a7c6b8cd3912c0335f"
+    },
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-06-22T07:33:17.850Z"
+    },
+    "updatedAt": {
+      "$date": "2026-06-22T07:33:17.850Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a38e53dc8e11d9ba945e3c5"
+    },
+    "title": "Senior React Developer",
+    "description": "We are looking for a Senior React Developer to join our core dashboard team. You will build responsive user interfaces, optimize component performance, and integrate RESTful APIs using modern state management.",
+    "companyName": "Vercel",
+    "location": "Remote",
+    "type": "Remote",
+    "salary": "$120,000 - $150,000",
+    "requirements": [
+      "React",
+      "TypeScript",
+      "Next.js",
+      "TailwindCSS"
+    ],
+    "employer": {
+      "$oid": "6a3819a7c6b8cd3912c0335f"
+    },
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-06-22T07:33:17.849Z"
+    },
+    "updatedAt": {
+      "$date": "2026-06-22T07:33:17.849Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a38e53dc8e11d9ba945e3c6"
+    },
+    "title": "DevOps Engineer",
+    "description": "Join our cloud infrastructure team to manage, scale, and secure our platforms. You will design CI/CD pipelines, orchestrate container services, and collaborate closely with backend engineers.",
+    "companyName": "AWS",
+    "location": "London, UK",
+    "type": "Full-time",
+    "salary": "£85,000 - £110,000",
+    "requirements": [
+      "DevOps",
+      "AWS",
+      "Docker",
+      "Kubernetes",
+      "CI/CD"
+    ],
+    "employer": {
+      "$oid": "6a3819a7c6b8cd3912c0335f"
+    },
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-06-22T07:33:17.849Z"
+    },
+    "updatedAt": {
+      "$date": "2026-06-22T07:33:17.849Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a38e53dc8e11d9ba945e3c8"
+    },
+    "title": "Machine Learning Researcher",
+    "description": "Work at the frontier of artificial intelligence. You will research, design, and train large neural networks to solve complex biological and structural modeling challenges.",
+    "companyName": "DeepMind",
+    "location": "London, UK",
+    "type": "Full-time",
+    "salary": "£100,005 - £140,000",
+    "requirements": [
+      "Machine Learning",
+      "Python",
+      "PyTorch",
+      "Research"
+    ],
+    "employer": {
+      "$oid": "6a3819a7c6b8cd3912c0335f"
+    },
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-06-22T07:33:17.850Z"
+    },
+    "updatedAt": {
+      "$date": "2026-06-22T07:33:17.850Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a38e53dc8e11d9ba945e3cd"
+    },
+    "title": "Full-Stack TypeScript Engineer",
+    "description": "Build secure, rapid-scaling SaaS tools. You will work on both the front-end rendering layers and backend API infrastructure using unified TypeScript.",
+    "companyName": "Vercel",
+    "location": "Remote",
+    "type": "Remote",
+    "salary": "$130,000 - $160,000",
+    "requirements": [
+      "TypeScript",
+      "React",
+      "Node.js",
+      "MongoDB"
+    ],
+    "employer": {
+      "$oid": "6a3819a7c6b8cd3912c0335f"
+    },
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-06-22T07:33:17.850Z"
+    },
+    "updatedAt": {
+      "$date": "2026-06-22T07:33:17.850Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a38e53dc8e11d9ba945e3cc"
+    },
+    "title": "Front-End Developer Internship",
+    "description": "Kickstart your web development career with an active internship! You will learn from senior developers, write production UI code in React, and fix bugs.",
+    "companyName": "CodeAlpha",
+    "location": "Remote",
+    "type": "Internship",
+    "salary": "$2,000 / month",
+    "requirements": [
+      "React",
+      "CSS",
+      "HTML",
+      "Internship"
+    ],
+    "employer": {
+      "$oid": "6a3819a7c6b8cd3912c0335f"
+    },
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-06-22T07:33:17.850Z"
+    },
+    "updatedAt": {
+      "$date": "2026-06-22T07:33:17.850Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a38e53dc8e11d9ba945e3c7"
+    },
+    "title": "Node.js Backend Developer",
+    "description": "We are seeking a Backend Developer skilled in Node.js to design robust microservices and scale our databases. You will write clean, well-tested code and build developer APIs.",
+    "companyName": "Stripe",
+    "location": "San Francisco, CA",
+    "type": "Full-time",
+    "salary": "$130,000 - $160,000",
+    "requirements": [
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "REST APIs"
+    ],
+    "employer": {
+      "$oid": "6a3819a7c6b8cd3912c0335f"
+    },
+    "__v": 0,
+    "createdAt": {
+      "$date": "2026-06-22T07:33:17.850Z"
+    },
+    "updatedAt": {
+      "$date": "2026-06-22T07:33:17.850Z"
+    }
+  }
+]

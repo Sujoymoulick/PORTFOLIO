@@ -1,0 +1,44 @@
+[
+  {
+    "_id": {
+      "$oid": "6a381d730b3929409a282d4a"
+    },
+    "job": {
+      "$oid": "6a3819a7c6b8cd3912c03362"
+    },
+    "applicant": {
+      "$oid": "6a381ced0b3929409a282d49"
+    },
+    "resumeUrl": "/uploads/resumes/resume-1782062450591-354609322.pdf",
+    "coverLetter": "",
+    "status": "applied",
+    "createdAt": {
+      "$date": "2026-06-21T17:20:51.770Z"
+    },
+    "updatedAt": {
+      "$date": "2026-06-21T17:20:51.770Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6a3820bf0b3929409a282d4d"
+    },
+    "job": {
+      "$oid": "6a3820650b3929409a282d4c"
+    },
+    "applicant": {
+      "$oid": "6a381ced0b3929409a282d49"
+    },
+    "resumeUrl": "/uploads/resumes/resume-1782062450591-354609322.pdf",
+    "coverLetter": "I have experiance of 5 years ",
+    "status": "reviewing",
+    "createdAt": {
+      "$date": "2026-06-21T17:34:55.729Z"
+    },
+    "updatedAt": {
+      "$date": "2026-06-21T17:36:41.138Z"
+    },
+    "__v": 0
+  }
+]

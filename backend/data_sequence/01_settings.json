@@ -1,0 +1,18 @@
+[
+  {
+    "_id": {
+      "$oid": "6a4bbcf81b52fc9d6c40a88a"
+    },
+    "companyName": "My Portfolio",
+    "logo": "",
+    "address": "",
+    "phone": "",
+    "email": "sujoymoulick05@gmail.com",
+    "website": "",
+    "gst": "",
+    "invoicePrefix": "INV-",
+    "invoiceFooter": "Thank you for your business!",
+    "currency": "USD",
+    "timezone": "UTC"
+  }
+]

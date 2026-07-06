@@ -1,0 +1,139 @@
+[
+  {
+    "_id": {
+      "$oid": "6a3819a6c6b8cd3912c0335e"
+    },
+    "name": "Jane Seeker",
+    "email": "seeker@example.com",
+    "password": "$2b$10$9rT7QTt.x1Dn9CXPSUkh8.A9NXxvoTxGDfUl./t8zNeJ2J2ptTWv2",
+    "role": "jobseeker",
+    "bio": "High-performance React developer skilled in Tailwind CSS v4, Framer Motion, and MVC architecture.",
+    "skills": [
+      "React",
+      "JavaScript",
+      "Tailwind CSS",
+      "Framer Motion",
+      "Axios"
+    ],
+    "resumeUrl": "",
+    "companyName": "",
+    "createdAt": {
+      "$date": "2026-06-21T17:04:38.677Z"
+    },
+    "updatedAt": {
+      "$date": "2026-06-22T07:34:59.061Z"
+    },
+    "__v": 2,
+    "isOnboarded": false,
+    "preferences": []
+  },
+  {
+    "_id": {
+      "$oid": "6a3819a7c6b8cd3912c0335f"
+    },
+    "name": "John Hirer",
+    "email": "employer@example.com",
+    "password": "$2b$10$IQxvL9f6oIB3i4K58Hi5We.vojiTgj/qdZB47MrbQnoScn068nydO",
+    "role": "employer",
+    "bio": "Leading teams to build the future of agentic AI systems and advanced developer tooling.",
+    "skills": [],
+    "resumeUrl": "",
+    "companyName": "Google DeepMind",
+    "createdAt": {
+      "$date": "2026-06-21T17:04:39.055Z"
+    },
+    "updatedAt": {
+      "$date": "2026-06-21T17:04:39.055Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6a381cbb0b3929409a282d48"
+    },
+    "name": "Test User",
+    "email": "test_temp@example.com",
+    "password": "$2b$10$rXaBXKJi540ld47LWLNFnuQDumpdKhHKx/r/8yWe6/Vf3Ri24hLKm",
+    "role": "jobseeker",
+    "bio": "",
+    "skills": [],
+    "resumeUrl": "",
+    "companyName": "",
+    "createdAt": {
+      "$date": "2026-06-21T17:17:47.640Z"
+    },
+    "updatedAt": {
+      "$date": "2026-06-21T17:17:47.640Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6a381ced0b3929409a282d49"
+    },
+    "name": "Sujoy Moulick",
+    "email": "sujoymoulick05@gmail.com",
+    "password": "$2b$10$LgVws7/QSbmAOufpLP9OO.urmtoHWbgnTwgwmD1Ppcout1wRRwLRy",
+    "role": "jobseeker",
+    "bio": "",
+    "skills": [],
+    "resumeUrl": "/uploads/resumes/resume-1782062450591-354609322.pdf",
+    "companyName": "",
+    "createdAt": {
+      "$date": "2026-06-21T17:18:37.394Z"
+    },
+    "updatedAt": {
+      "$date": "2026-06-22T07:35:44.363Z"
+    },
+    "__v": 1,
+    "isOnboarded": true,
+    "preferences": [
+      "Node.js",
+      "React",
+      "Python",
+      "Remote"
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "6a381fd50b3929409a282d4b"
+    },
+    "name": "Shital Mouilick",
+    "email": "lifeunderzero777@gmail.com",
+    "password": "$2b$10$mKjB2HUScSkqDGK0SzWGD.I2q6CBXE2NgwkBJLcL9HplEBFNV/N3W",
+    "role": "employer",
+    "bio": "",
+    "skills": [],
+    "resumeUrl": "",
+    "companyName": "TOOLSPAGE",
+    "createdAt": {
+      "$date": "2026-06-21T17:31:01.900Z"
+    },
+    "updatedAt": {
+      "$date": "2026-06-21T17:31:01.900Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6a3967f7793005686f4c9d3b"
+    },
+    "name": "Test User",
+    "email": "test5@example.com",
+    "password": "$2b$10$qXnDM8vFkTc6C4Mv0XcOp.fhXPylMb/5J3B05M2w952o9LuMMnt6S",
+    "role": "jobseeker",
+    "bio": "",
+    "skills": [],
+    "resumeUrl": "",
+    "preferences": [],
+    "isOnboarded": false,
+    "companyName": "",
+    "createdAt": {
+      "$date": "2026-06-22T16:51:03.213Z"
+    },
+    "updatedAt": {
+      "$date": "2026-06-22T16:51:03.213Z"
+    },
+    "__v": 0
+  }
+]
