@@ -181,7 +181,7 @@ export default function WorkingProjectsPage() {
         >
           <div 
             onClick={(e) => e.stopPropagation()} 
-            className="w-full max-w-2xl rounded-[2.5rem] bg-zinc-900/90 border border-white/10 p-8 md:p-10 shadow-2xl relative overflow-hidden backdrop-blur-xl flex flex-col md:flex-row gap-8 max-h-[90vh]"
+            className="w-full max-w-2xl rounded-[2.5rem] bg-zinc-900/95 border border-white/10 p-8 md:p-10 shadow-2xl relative backdrop-blur-xl flex flex-col md:flex-row gap-8 max-h-[90vh] overflow-y-auto md:overflow-hidden"
           >
             {/* Close Button */}
             <button 

@@ -870,131 +870,7 @@ function Home() {
                       </div>
                     </div>
                   )}
-
-                  {/* Detail Modal Overlay for Homepage Working Projects */}
-                  {selectedWorkingProject && (
-                    <div 
-                      onClick={() => setSelectedWorkingProject(null)} 
-                      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/75 backdrop-blur-md p-4"
-                    >
-                      <div 
-                        onClick={(e) => e.stopPropagation()} 
-                        className="w-full max-w-2xl rounded-[2.5rem] bg-zinc-900/90 border border-white/10 p-8 md:p-10 shadow-2xl relative overflow-hidden backdrop-blur-xl flex flex-col md:flex-row gap-8 max-h-[90vh]"
-                      >
-                        {/* Close Button */}
-                        <button 
-                          onClick={() => setSelectedWorkingProject(null)}
-                          className="absolute top-6 right-6 p-2 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/15 text-white/50 hover:text-white transition-all cursor-pointer animate-fade-in"
-                        >
-                          <X size={16} />
-                        </button>
-
-                        {/* Left Content Side */}
-                        <div className="flex-1 space-y-6 overflow-y-auto pr-2">
-                          <div>
-                            <span className="px-3 py-1 rounded bg-blue-500/10 border border-blue-500/20 text-[9px] font-mono font-bold uppercase tracking-wider text-blue-400 inline-block mb-3">
-                              {selectedWorkingProject.category}
-                            </span>
-                            <h2 className="text-2xl md:text-3xl font-serif font-medium text-white leading-tight">
-                              {selectedWorkingProject.title}
-                            </h2>
-                            <span className="text-[10px] text-white/30 font-mono block mt-2">
-                              LOGGED: {new Date(selectedWorkingProject.createdAt).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}
-                            </span>
-                          </div>
-
-                          <div className="space-y-2">
-                            <h4 className="text-[10px] font-bold uppercase tracking-widest text-white/40">Description & Context</h4>
-                            <p className="text-xs text-white/60 leading-relaxed font-light whitespace-pre-line">
-                              {selectedWorkingProject.description}
-                            </p>
-                          </div>
-
-                          <div className="flex flex-wrap items-center gap-4 pt-4 border-t border-white/5">
-                            {selectedWorkingProject.githubLink && (
-                              <a 
-                                href={selectedWorkingProject.githubLink} 
-                                target="_blank" 
-                                rel="noopener noreferrer"
-                                className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/15 text-xs text-white/70 hover:text-white font-medium transition-all"
-                              >
-                                <Github size={14} /> Repository Code
-                              </a>
-                            )}
-                            {selectedWorkingProject.liveUrl && (
-                              <a 
-                                href={selectedWorkingProject.liveUrl} 
-                                target="_blank" 
-                                rel="noopener noreferrer"
-                                className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-blue-500/10 border border-blue-500/20 hover:bg-blue-500/20 hover:border-blue-500/30 text-xs text-blue-400 hover:text-blue-300 font-medium transition-all"
-                              >
-                                <Globe size={14} /> Launch Application
-                              </a>
-                            )}
-                            <button
-                              onClick={() => setHomeContributeOpen(true)}
-                              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-green-500/10 border border-green-500/20 hover:bg-green-500/20 hover:border-green-500/30 text-xs text-green-400 hover:text-green-300 font-medium transition-all cursor-pointer"
-                            >
-                              <GitPullRequest size={14} /> Contribute
-                            </button>
-                          </div>
-                        </div>
-
-                        {/* Right Progress & Status Side */}
-                        <div className="w-full md:w-56 flex flex-col justify-between border-t md:border-t-0 md:border-l border-white/5 pt-6 md:pt-0 md:pl-8 space-y-6">
-                          <div className="space-y-4">
-                            <div className="space-y-1">
-                              <h4 className="text-[10px] font-bold uppercase tracking-widest text-white/40">Status Tracker</h4>
-                              <div className="flex items-center gap-2 text-xs font-semibold text-white/80 mt-2">
-                                <span className="w-2.5 h-2.5 rounded-full bg-blue-500 animate-pulse"></span>
-                                {selectedWorkingProject.status}
-                              </div>
-                            </div>
-
-                            <div className="space-y-2">
-                              <div className="flex justify-between text-[10px] font-mono font-bold">
-                                <span className="text-white/40 uppercase tracking-widest">Progress</span>
-                                <span className="text-blue-400">{selectedWorkingProject.progress}%</span>
-                              </div>
-                              <div className="w-full h-2 bg-white/5 rounded-full overflow-hidden">
-                                <div 
-                                  className="h-full bg-blue-500 rounded-full transition-all duration-700"
-                                  style={{ width: `${selectedWorkingProject.progress}%` }}
-                                />
-                              </div>
-                            </div>
-                          </div>
-
-                          <div className="space-y-2">
-                            <h4 className="text-[10px] font-bold uppercase tracking-widest text-white/40">Tech Stack</h4>
-                            <div className="flex flex-wrap gap-1.5 pt-1">
-                              {(selectedWorkingProject.tags || []).map((t: string) => (
-                                <span 
-                                  key={t} 
-                                  className="text-[9px] px-2.5 py-1 rounded-lg bg-white/5 border border-white/5 text-white/50 uppercase font-mono font-bold tracking-wider"
-                                >
-                                  {t}
-                                </span>
-                              ))}
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Glow Flare */}
-                        <div className="absolute -bottom-20 -right-20 w-44 h-44 bg-blue-500/10 blur-[80px] pointer-events-none rounded-full" />
-                      </div>
-                    </div>
-                  )}
-
-                  {selectedWorkingProject && (
-                    <ContributeModal 
-                      isOpen={homeContributeOpen} 
-                      onClose={() => setHomeContributeOpen(false)} 
-                      projectTitle={selectedWorkingProject.title} 
-                      projectType="working" 
-                    />
-                  )}
-                 </section>
+                  </section>
 
                  <section id="stack" className="max-w-7xl mx-auto px-6 py-32 relative z-10 scroll-mt-24">
                    <SectionHeading icon={Cpu} subtitle="Technologies">My Tech Stack</SectionHeading>
@@ -1107,6 +983,130 @@ function Home() {
                 </div>
               </div>
             </footer>
+
+            {/* Detail Modal Overlay for Homepage Working Projects */}
+            {selectedWorkingProject && (
+              <div 
+                onClick={() => setSelectedWorkingProject(null)} 
+                className="fixed inset-0 z-[100] flex items-center justify-center bg-black/75 backdrop-blur-md p-4 animate-fade-in"
+              >
+                <div 
+                  onClick={(e) => e.stopPropagation()} 
+                  className="w-full max-w-2xl rounded-[2.5rem] bg-zinc-900/95 border border-white/10 p-8 md:p-10 shadow-2xl relative backdrop-blur-xl flex flex-col md:flex-row gap-8 max-h-[90vh] overflow-y-auto md:overflow-hidden"
+                >
+                  {/* Close Button */}
+                  <button 
+                    onClick={() => setSelectedWorkingProject(null)}
+                    className="absolute top-6 right-6 p-2 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/15 text-white/50 hover:text-white transition-all cursor-pointer animate-fade-in"
+                  >
+                    <X size={16} />
+                  </button>
+
+                  {/* Left Content Side */}
+                  <div className="flex-1 space-y-6 overflow-y-auto pr-2">
+                    <div>
+                      <span className="px-3 py-1 rounded bg-blue-500/10 border border-blue-500/20 text-[9px] font-mono font-bold uppercase tracking-wider text-blue-400 inline-block mb-3">
+                        {selectedWorkingProject.category}
+                      </span>
+                      <h2 className="text-2xl md:text-3xl font-serif font-medium text-white leading-tight">
+                        {selectedWorkingProject.title}
+                      </h2>
+                      <span className="text-[10px] text-white/30 font-mono block mt-2">
+                        LOGGED: {new Date(selectedWorkingProject.createdAt).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}
+                      </span>
+                    </div>
+
+                    <div className="space-y-2">
+                      <h4 className="text-[10px] font-bold uppercase tracking-widest text-white/40">Description & Context</h4>
+                      <p className="text-xs text-white/60 leading-relaxed font-light whitespace-pre-line">
+                        {selectedWorkingProject.description}
+                      </p>
+                    </div>
+
+                    <div className="flex flex-wrap items-center gap-4 pt-4 border-t border-white/5">
+                      {selectedWorkingProject.githubLink && (
+                        <a 
+                          href={selectedWorkingProject.githubLink} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/15 text-xs text-white/70 hover:text-white font-medium transition-all"
+                        >
+                          <Github size={14} /> Repository Code
+                        </a>
+                      )}
+                      {selectedWorkingProject.liveUrl && (
+                        <a 
+                          href={selectedWorkingProject.liveUrl} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-blue-500/10 border border-blue-500/20 hover:bg-blue-500/20 hover:border-blue-500/30 text-xs text-blue-400 hover:text-blue-300 font-medium transition-all"
+                        >
+                          <Globe size={14} /> Launch Application
+                        </a>
+                      )}
+                      <button
+                        onClick={() => setHomeContributeOpen(true)}
+                        className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-green-500/10 border border-green-500/20 hover:bg-green-500/20 hover:border-green-500/30 text-xs text-green-400 hover:text-green-300 font-medium transition-all cursor-pointer"
+                      >
+                        <GitPullRequest size={14} /> Contribute
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Right Progress & Status Side */}
+                  <div className="w-full md:w-56 flex flex-col justify-between border-t md:border-t-0 md:border-l border-white/5 pt-6 md:pt-0 md:pl-8 space-y-6">
+                    <div className="space-y-4">
+                      <div className="space-y-1">
+                        <h4 className="text-[10px] font-bold uppercase tracking-widest text-white/40">Status Tracker</h4>
+                        <div className="flex items-center gap-2 text-xs font-semibold text-white/80 mt-2">
+                          <span className="w-2.5 h-2.5 rounded-full bg-blue-500 animate-pulse"></span>
+                          {selectedWorkingProject.status}
+                        </div>
+                      </div>
+
+                      <div className="space-y-2">
+                        <div className="flex justify-between text-[10px] font-mono font-bold">
+                          <span className="text-white/40 uppercase tracking-widest">Progress</span>
+                          <span className="text-blue-400">{selectedWorkingProject.progress}%</span>
+                        </div>
+                        <div className="w-full h-2 bg-white/5 rounded-full overflow-hidden">
+                          <div 
+                            className="h-full bg-blue-500 rounded-full transition-all duration-700"
+                            style={{ width: `${selectedWorkingProject.progress}%` }}
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <h4 className="text-[10px] font-bold uppercase tracking-widest text-white/40">Tech Stack</h4>
+                      <div className="flex flex-wrap gap-1.5 pt-1">
+                        {(selectedWorkingProject.tags || []).map((t: string) => (
+                          <span 
+                            key={t} 
+                            className="text-[9px] px-2.5 py-1 rounded-lg bg-white/5 border border-white/5 text-white/50 uppercase font-mono font-bold tracking-wider"
+                          >
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Glow Flare */}
+                  <div className="absolute -bottom-20 -right-20 w-44 h-44 bg-blue-500/10 blur-[80px] pointer-events-none rounded-full" />
+                </div>
+              </div>
+            )}
+
+            {selectedWorkingProject && (
+              <ContributeModal 
+                isOpen={homeContributeOpen} 
+                onClose={() => setHomeContributeOpen(false)} 
+                projectTitle={selectedWorkingProject.title} 
+                projectType="working" 
+              />
+            )}
           </motion.div>
         )}
       </AnimatePresence>
